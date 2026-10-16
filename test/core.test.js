@@ -99,3 +99,11 @@ test('gradeTest scores each matching item, choice and written answer; blanks cou
   assert.deepEqual(r.results, [[true, false], [true], [true], [false], [false]]);
   assert.deepEqual([r.score, r.total, r.blank], [3, 6, 2]);
 });
+
+test('quizletUrl only accepts https quizlet.com links', () => {
+  const ok = 'https://quizlet.com/503521327/anthro-2a-egan-midterm-1-flash-cards/?i=26yw6u&x=1jqt';
+  assert.equal(Core.quizletUrl('  ' + ok + ' '), ok);
+  assert.ok(Core.quizletUrl('https://www.quizlet.com/123/x/'));
+  for (const bad of ['http://quizlet.com/1/', 'https://quizlet.com.evil.com/1/', 'https://evilquizlet.com/1/', 'javascript:alert(1)', 'quizlet.com/1/', ''])
+    assert.equal(Core.quizletUrl(bad), null, bad);
+});

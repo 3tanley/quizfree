@@ -101,6 +101,14 @@
     return { results, score: flat.filter(Boolean).length, total: flat.length, blank };
   }
 
-  const Core = { normalize, isCorrect, shuffle, choices, createSession, current, answer, parseCards, createTest, gradeTest };
+  // Only https quizlet.com links get opened from the quizlet command.
+  function quizletUrl(input) {
+    try {
+      const u = new URL(String(input).trim());
+      return u.protocol === 'https:' && /(^|\.)quizlet\.com$/.test(u.hostname) ? u.href : null;
+    } catch { return null; }
+  }
+
+  const Core = { normalize, isCorrect, shuffle, choices, createSession, current, answer, parseCards, createTest, gradeTest, quizletUrl };
   if (typeof module === 'object' && module.exports) module.exports = Core; else root.Core = Core;
 })(this);

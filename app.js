@@ -11,6 +11,9 @@ const SIDE = { term: 'term', def: 'definition' };
 const other = side => (side === 'term' ? 'def' : 'term');
 const TEST_NAMES = { match: 'matching', choice: 'multiple choice', written: 'written' };
 const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
+// web pages can't open file:// links, so a local copy gets a bookmark that downloads instead
+const APP_URL = /^https?:$/.test(location.protocol) ? location.origin + location.pathname : null;
+const BOOKMARKLET = 'javascript:' + encodeURIComponent(`(${quizletToQuizfree})(${JSON.stringify(APP_URL)})`);
 
 const SAMPLE = {
   name: 'spanish basics',
@@ -49,6 +52,7 @@ let view = 'home', setId = null;
 let flash = null; // { order, i, flipped }
 let learn = null; // { session, ask, options, feedback, wrong }
 let test = null; // { types, count, ask, questions, answers, result }; questions null = setup screen
+let quizletLink = '';
 
 const cur = () => sets.find(s => s.id === setId);
 const say = (msg, cls = '') => { out.className = cls; out.textContent = msg; };
@@ -64,7 +68,7 @@ const views = {
           <span class="k">[${i + 1}]</span><span>${esc(s.name)}</span><span class="leader"></span><span class="dim">${plural(s.cards.length, 'card')}</span>
         </button></li>`).join('')}</ol>`
       : '<p class="dim">(empty) — make your first set with [n]</p>'}
-    <p>${btn('n', 'new set', 'new')} ${btn('i', 'import', 'import')} ${sets.length ? btn('e', 'export all', 'exportAll') : ''}</p>
+    <p>${btn('n', 'new set', 'new')} ${btn('q', 'from quizlet', 'quizlet')} ${btn('i', 'import', 'import')} ${sets.length ? btn('e', 'export all', 'exportAll') : ''}</p>
     <p class="blink"><span class="ps">$</span></p>`,
 
   set: s => `
@@ -127,6 +131,23 @@ const views = {
       <p class="dim">${btn('t', 'swap sides', 'swap')} ${btn('esc', 'back', 'back')}</p>`;
   },
 
+  quizlet: () => `
+    <p><span class="ps">$</span> quizfree import --from quizlet</p>
+    <p class="dim">quizlet won't let other sites read its pages, so a bookmark does the copying from inside your own browser.</p>
+    <p><span class="k">once:</span> drag this to your bookmarks bar → <a class="bookmarklet" href="${esc(BOOKMARKLET)}">→ quizfree</a>
+      <span class="dim">(no bar? ctrl+shift+b, or ⌘+shift+b on a mac)</span></p>
+    <form data-act="quizlet" class="edit">
+      <label for="qlink"><span class="k">1.</span> paste a quizlet set link</label>
+      <div class="typeline"><span class="ps">&gt;</span><input id="qlink" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="https://quizlet.com/..." value="${esc(quizletLink)}" autofocus></div>
+      <p class="err" role="alert"></p>
+      <p><button type="submit"><span class="k">[enter]</span> open it in a new tab</button> ${btn('esc', 'back', 'back')}</p>
+    </form>
+    <p><span class="k">2.</span> on the quizlet page, click the <span class="hi">→ quizfree</span> bookmark.</p>
+    ${APP_URL
+      ? '<p><span class="k">3.</span> quizfree opens in a new tab with the set already added.</p>'
+      : `<p><span class="k">3.</span> the bookmark downloads the set as a .json. come back here and press <span class="k">[i]</span> to import it.</p>
+         <p class="dim">this copy of quizfree is opened as a local file, which web pages aren't allowed to open, so the set can't be added for you automatically. the online version can do that.</p>`}`,
+
   test: s => {
     const T = test;
     if (!T.questions) return `
@@ -182,8 +203,8 @@ const views = {
 
 function render() {
   const set = cur();
-  if (!set && view !== 'home' && view !== 'edit') view = 'home';
-  const path = '~/sets' + (set ? '/' + slug(set.name) : view === 'edit' ? '/new' : '') + ({ cards: '/cards', learn: '/learn', test: '/test', edit: '/edit' }[view] || '');
+  if (!set && !['home', 'edit', 'quizlet'].includes(view)) view = 'home';
+  const path = '~/sets' + (set ? '/' + slug(set.name) : view === 'edit' ? '/new' : '') + ({ cards: '/cards', learn: '/learn', test: '/test', edit: '/edit', quizlet: '/quizlet' }[view] || '');
   $('#title').textContent = 'quizfree — ' + path;
   $('#prompt').textContent = `guest@quizfree:${path}$`;
   screen.innerHTML = views[view](set);
@@ -194,7 +215,7 @@ const go = v => { view = v; render(); };
 const home = () => { setId = null; go('home'); };
 function back() {
   if (view === 'test' && test.questions && !test.result && !confirm('leave this test? your answers will be lost.')) return;
-  view === 'set' || view === 'home' || (view === 'edit' && !setId) ? home() : go('set');
+  view === 'set' || view === 'home' || view === 'quizlet' || (view === 'edit' && !setId) ? home() : go('set');
 }
 
 function openSet(arg) {
@@ -332,6 +353,57 @@ function exportSets(list) {
   say(`exported ${plural(list.length, 'set')} → ${a.download}`);
 }
 
+function addSets(list) {
+  sets.push(...list);
+  save();
+  say(`imported ${list.map(s => `${s.name} (${plural(s.cards.length, 'card')})`).join(', ')}`);
+}
+
+// --- quizlet import: the bookmark on the quizlet page opens quizfree with the set in #import= ---
+function openQuizlet(link) {
+  quizletLink = link.trim();
+  setId = null;
+  go('quizlet');
+  const err = screen.querySelector('.err');
+  const url = Core.quizletUrl(link);
+  if (!url) return (err.textContent = "that isn't a quizlet.com link");
+  const win = window.open(url, '_blank');
+  if (!win) return (err.textContent = 'your browser blocked the new tab. allow pop-ups for this page and try again.');
+  win.opener = null;
+}
+
+function importFromHash() {
+  if (!location.hash.startsWith('#import=')) return false;
+  const raw = location.hash.slice(8);
+  history.replaceState(null, '', location.pathname + location.search); // so a reload doesn't import twice
+  let data;
+  try { data = raw.length < 5e6 && JSON.parse(decodeURIComponent(raw)); } catch {}
+  const list = (data && Array.isArray(data.sets) ? data.sets : []).map(s => cleanSet(s)).filter(s => s && s.cards.length);
+  if (!list.length) { say('that import link had no flashcards in it', 'err'); return false; }
+  const s = list[0];
+  // clicking the bookmark again (e.g. after "see more") should update the set, not duplicate it
+  const same = sets.find(x => x.name === s.name);
+  if (same && confirm(`you already have "${same.name}". replace its ${plural(same.cards.length, 'card')} with these ${s.cards.length}? (cancel keeps both)`)) {
+    same.cards = s.cards;
+    save();
+    say(`updated ${same.name} (${plural(s.cards.length, 'card')})`);
+    setId = same.id;
+  } else {
+    addSets([s]);
+    setId = s.id;
+  }
+  view = 'set';
+  return true;
+}
+addEventListener('hashchange', () => importFromHash() && render());
+
+// another quizfree tab changed the sets (e.g. a quizlet import opened in a new tab)
+addEventListener('storage', e => {
+  if (e.key !== KEY) return;
+  sets = load();
+  if (view === 'home' || (view !== 'edit' && !cur())) home(); // never yank someone out of the editor
+});
+
 $('#import-file').addEventListener('change', async e => {
   const file = e.target.files[0];
   e.target.value = '';
@@ -342,9 +414,7 @@ $('#import-file').addEventListener('change', async e => {
   const raw = Array.isArray(data) ? data : data && Array.isArray(data.sets) ? data.sets : [data];
   const list = raw.map(s => cleanSet(s)).filter(s => s && s.cards.length);
   if (!list.length) return say('no sets found in that file', 'err');
-  sets.push(...list);
-  save();
-  say(`imported ${plural(list.length, 'set')}`);
+  addSets(list);
   home();
 });
 
@@ -352,6 +422,7 @@ $('#import-file').addEventListener('change', async e => {
 const actions = {
   open: el => { setId = el.dataset.id; go('set'); },
   new: () => { setId = null; go('edit'); },
+  quizlet: () => { setId = null; go('quizlet'); },
   edit: () => go('edit'),
   back,
   cards: startCards,
@@ -375,20 +446,25 @@ const actions = {
 };
 
 screen.addEventListener('click', e => {
+  if (e.target.closest('a.bookmarklet')) {
+    e.preventDefault();
+    return say('drag that link to your bookmarks bar, then click it while you are on a quizlet set page', 'err');
+  }
   const el = e.target.closest('button[data-act]');
   if (el && !el.disabled) actions[el.dataset.act](el);
 });
 screen.addEventListener('submit', e => {
   e.preventDefault();
   // the test form is graded only by its submit button / ctrl+enter, never by enter in a field
-  ({ type: learnType, save: saveEdit, testStart })[e.target.dataset.act]?.(e.target);
+  ({ type: learnType, save: saveEdit, testStart, quizlet: f => openQuizlet(f.querySelector('input').value) })[e.target.dataset.act]?.(e.target);
 });
 
 const keys = {
-  home: { n: actions.new, i: actions.import, e: () => sets.length && actions.exportAll() },
+  home: { n: actions.new, q: actions.quizlet, i: actions.import, e: () => sets.length && actions.exportAll() },
   set: { f: startCards, l: startLearn, t: startTest, e: actions.edit, x: actions.export, d: removeSet },
   test: { r: () => test.result && runTest(), n: () => test.result && actions.testSetup() },
   edit: {},
+  quizlet: {},
   cards: { ' ': actions.flip, Enter: actions.flip, ArrowRight: () => step(1), ArrowLeft: () => step(-1), s: actions.shuffle, l: startLearn },
   learn: { Enter: learnNext, o: actions.override, t: actions.swap, f: () => !Core.current(learn.session) && startCards(), r: () => !Core.current(learn.session) && startLearn() },
 };
@@ -426,6 +502,7 @@ const HELP = `commands:
   ls               list your sets
   cd <n|name>      open a set (cd .. goes back)
   new              create a set
+  quizlet [link]   copy a set from a quizlet link
   edit | rm        edit / delete the open set
   cards | learn | test   study the open set
   import | export  import a .json file / export the open set (or all sets)
@@ -446,6 +523,7 @@ $('#cmd').addEventListener('submit', e => {
     cd: () => (arg === '..' ? back() : arg && arg !== '~' ? openSet(arg) : home()),
     open: () => openSet(arg),
     new: actions.new,
+    quizlet: () => (arg ? openQuizlet(arg) : actions.quizlet()),
     import: actions.import,
     export: () => (cur() ? actions.export() : actions.exportAll()),
     edit: needSet(actions.edit),
@@ -458,4 +536,5 @@ $('#cmd').addEventListener('submit', e => {
   if (view !== 'edit' && !screen.querySelector('[autofocus]')) cmdInput.focus();
 });
 
+importFromHash();
 render();

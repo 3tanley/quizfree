@@ -18,6 +18,11 @@ Free flashcards for you and your friends, with a terminal-style UI. No account, 
   - **[r]** retakes with new questions; **[n]** changes the settings.
 - **Terminal UI.** Everything is clickable, but you can also drive it from the keyboard or the command line at the bottom.
 - **Share sets.** Export a set as `.json`, send it to a friend, and they import it.
+- **Copy sets from Quizlet links.** Press **[q]** (or type `quizlet <link>`) and follow the steps on screen:
+  1. One time: drag the **→ quizfree** button to your bookmarks bar.
+  2. Paste a Quizlet set link. quizfree opens it in a new tab.
+  3. Click the **→ quizfree** bookmark on the Quizlet page. On the online version, the set is added to quizfree automatically. On a copy opened from your disk, the bookmark downloads a `.json` instead; press **[i]** to import it.
+  - Why a bookmark? Quizlet blocks other sites from reading its pages, so the copying has to happen inside your own browser, on the page you already have open. Click the bookmark again after "See more" to pick up the rest of a long set.
 - **Quizlet/spreadsheet paste.** When editing a set, paste tab-separated `term⇥definition` lines directly.
 
 ## Run it
@@ -31,14 +36,14 @@ To give friends a link, turn on GitHub Pages: repo **Settings → Pages → Depl
 | Where | Keys |
 |---|---|
 | anywhere | `:` jump to command line · `esc` back |
-| set list | `1`–`9` open set · `n` new · `i` import · `e` export all |
+| set list | `1`–`9` open set · `n` new · `q` from quizlet · `i` import · `e` export all |
 | a set | `f` flashcards · `l` learn · `t` test · `e` edit · `x` export · `d` delete |
 | flashcards | `space` flip · `←` `→` prev/next · `s` shuffle |
 | learn | `1`–`4` pick · type + `enter` · `enter` continue · `o` override · `t` swap sides |
 | test | `enter` next field · `ctrl+enter` / `⌘enter` submit · `r` retake · `n` new test |
 | editor | `ctrl+s` / `⌘s` save |
 
-Command line: `help`, `ls`, `cd <n|name>`, `cd ..`, `new`, `edit`, `rm`, `cards`, `learn`, `test`, `import`, `export`, `clear`.
+Command line: `help`, `ls`, `cd <n|name>`, `cd ..`, `new`, `quizlet [link]`, `edit`, `rm`, `cards`, `learn`, `test`, `import`, `export`, `clear`.
 
 Card format in the editor is one card per line:
 
@@ -58,6 +63,7 @@ core.js            study logic (learn session, test builder + grading, answer ma
 app.js             UI: views, keyboard shortcuts, command line, storage, import/export
 style.css          terminal look
 index.html         page shell
+bookmarklet.js     the → quizfree bookmark (runs on quizlet.com set pages, not in the app)
 test/core.test.js  tests for core.js
 graphify-out/      knowledge graph of this codebase (open graph.html)
 ```

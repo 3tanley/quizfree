@@ -190,6 +190,16 @@ select {
 select:focus { outline: none; border-color: var(--fg); }
 input:disabled, select:disabled { opacity: 1; color: var(--hi); cursor: default; }
 
+.bookmarklet {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px dashed var(--amber);
+  color: var(--amber);
+  text-decoration: none;
+  cursor: grab;
+}
+.bookmarklet:hover, .bookmarklet:focus-visible { background: var(--amber); color: var(--bg); text-shadow: none; outline: none; }
+
 #out { padding: 0 22px; white-space: pre-wrap; color: var(--dim); }
 #out:not(:empty) { padding-bottom: 8px; }
 #out.err { color: var(--red); }
