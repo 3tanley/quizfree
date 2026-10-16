@@ -1,0 +1,26 @@
+{
+  "app.js": {
+    "mtime": 1792132188.7579765,
+    "seen": 1792132451.941996,
+    "ast_hash": "c7db67258b477b38a556b5cc63b1e9b2",
+    "semantic_hash": "c7db67258b477b38a556b5cc63b1e9b2"
+  },
+  "core.js": {
+    "mtime": 1792132110.9343038,
+    "seen": 1792132451.9419992,
+    "ast_hash": "f7a8006960b0f8646bf2669a8b46a067",
+    "semantic_hash": "f7a8006960b0f8646bf2669a8b46a067"
+  },
+  "test/core.test.js": {
+    "mtime": 1792132110.988034,
+    "seen": 1792132451.9420002,
+    "ast_hash": "5d0ba24e4a70a4b06088f23df904531b",
+    "semantic_hash": "5d0ba24e4a70a4b06088f23df904531b"
+  },
+  "index.html": {
+    "mtime": 1792132137.253003,
+    "seen": 1792132451.9420009,
+    "ast_hash": "0fa488094572aec00c25852a5a358122",
+    "semantic_hash": "0fa488094572aec00c25852a5a358122"
+  }
+}
