@@ -4,6 +4,9 @@
   const normalize = s => String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '')
     .replace(/[^\p{L}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ').trim();
 
+  // comparison key for answers; symbol-only answers (e.g. "+") normalize to '', so keep them as-is
+  const key = v => normalize(v) || v;
+
   function isCorrect(input, answer) {
     const a = normalize(answer);
     // answers made only of symbols (e.g. "+") normalize to '', so compare them as typed
@@ -21,7 +24,6 @@
 
   // Up to n options: the right answer plus distinct wrong answers from the same set.
   function choices(cards, card, side, n = 4) {
-    const key = v => normalize(v) || v;
     const seen = new Set([key(card[side])]), wrong = [];
     for (const c of shuffle(cards)) {
       const k = key(c[side]);
@@ -56,6 +58,49 @@
     return { cards, bad };
   }
 
-  const Core = { normalize, isCorrect, shuffle, choices, createSession, current, answer, parseCards };
+  // Test: a one-shot quiz. Picked cards are split evenly across the chosen types,
+  // and matching comes in groups of 2-6 so the dropdowns stay short.
+  const TEST_TYPES = ['match', 'choice', 'written'];
+
+  function createTest(cards, { count = 20, types = TEST_TYPES, ask = 'term' } = {}) {
+    const side = ask === 'term' ? 'def' : 'term';
+    const picked = shuffle(cards).slice(0, Math.max(0, Math.min(count, cards.length)));
+    const order = TEST_TYPES.filter(t => types.includes(t));
+    const sizes = order.map((_, i) => Math.floor(picked.length / order.length) + (i < picked.length % order.length ? 1 : 0));
+    // a 1-item matching question is free points; hand that card to the next type
+    if (order[0] === 'match' && sizes[0] === 1 && order.length > 1) { sizes[0] = 0; sizes[1]++; }
+
+    const questions = [];
+    let at = 0;
+    order.forEach((type, i) => {
+      const block = picked.slice(at, (at += sizes[i]));
+      if (type === 'match') {
+        const groups = Math.ceil(block.length / 6);
+        for (let g = 0; g < groups; g++) {
+          const items = block.filter((_, j) => j % groups === g).map(c => ({ prompt: c[ask], answer: c[side] }));
+          questions.push({ type, items, options: shuffle(items.map(it => it.answer)) });
+        }
+      } else {
+        for (const c of block) questions.push({ type, prompt: c[ask], answer: c[side], ...(type === 'choice' && { options: choices(cards, c, side) }) });
+      }
+    });
+    return { questions, ask };
+  }
+
+  // answers[i]: match -> array of picked option texts, choice -> picked option text, written -> typed text.
+  // One point per matching item, choice and written question; null or '' counts as blank (and wrong).
+  function gradeTest(test, answers) {
+    const results = test.questions.map((q, i) => {
+      const a = answers[i];
+      if (q.type === 'match') return q.items.map((it, j) => a?.[j] != null && key(a[j]) === key(it.answer));
+      if (q.type === 'choice') return [a != null && key(a) === key(q.answer)];
+      return [isCorrect(a || '', q.answer)];
+    });
+    const flat = results.flat();
+    const blank = answers.flat().filter(a => a == null || !String(a).trim()).length;
+    return { results, score: flat.filter(Boolean).length, total: flat.length, blank };
+  }
+
+  const Core = { normalize, isCorrect, shuffle, choices, createSession, current, answer, parseCards, createTest, gradeTest };
   if (typeof module === 'object' && module.exports) module.exports = Core; else root.Core = Core;
 })(this);

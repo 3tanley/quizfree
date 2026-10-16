@@ -12,6 +12,10 @@ Free flashcards for you and your friends, with a terminal-style UI. No account, 
   3. Get the typed version right and the card is **mastered**. Wrong answers come back a few cards later.
   - Typed answers ignore case, accents, punctuation, and extra spaces (`adios` matches `adiós`). Press **[o]** to override when you were right anyway.
   - Press **[t]** to swap sides, so you're shown the definition and answer with the term.
+- **Test mode** (like Quizlet's Test). One page of questions, graded when you submit:
+  - Pick the question types: **matching**, **multiple choice**, and **written** (short answer). Also pick the number of questions and which side you're shown.
+  - You get a score and percentage, with a ✓/✗ on every question and the right answer shown under each miss.
+  - **[r]** retakes with new questions; **[n]** changes the settings.
 - **Terminal UI.** Everything is clickable, but you can also drive it from the keyboard or the command line at the bottom.
 - **Share sets.** Export a set as `.json`, send it to a friend, and they import it.
 - **Quizlet/spreadsheet paste.** When editing a set, paste tab-separated `term⇥definition` lines directly.
@@ -28,12 +32,13 @@ To give friends a link, turn on GitHub Pages: repo **Settings → Pages → Depl
 |---|---|
 | anywhere | `:` jump to command line · `esc` back |
 | set list | `1`–`9` open set · `n` new · `i` import · `e` export all |
-| a set | `f` flashcards · `l` learn · `e` edit · `x` export · `d` delete |
+| a set | `f` flashcards · `l` learn · `t` test · `e` edit · `x` export · `d` delete |
 | flashcards | `space` flip · `←` `→` prev/next · `s` shuffle |
 | learn | `1`–`4` pick · type + `enter` · `enter` continue · `o` override · `t` swap sides |
+| test | `enter` next field · `ctrl+enter` / `⌘enter` submit · `r` retake · `n` new test |
 | editor | `ctrl+s` / `⌘s` save |
 
-Command line: `help`, `ls`, `cd <n|name>`, `cd ..`, `new`, `edit`, `rm`, `cards`, `learn`, `import`, `export`, `clear`.
+Command line: `help`, `ls`, `cd <n|name>`, `cd ..`, `new`, `edit`, `rm`, `cards`, `learn`, `test`, `import`, `export`, `clear`.
 
 Card format in the editor is one card per line:
 
@@ -49,7 +54,7 @@ Sets are saved in your browser's `localStorage`, so they stay on that one browse
 ## Development
 
 ```
-core.js            study logic (learn session, answer matching, multiple choice, card parsing)
+core.js            study logic (learn session, test builder + grading, answer matching, card parsing)
 app.js             UI: views, keyboard shortcuts, command line, storage, import/export
 style.css          terminal look
 index.html         page shell

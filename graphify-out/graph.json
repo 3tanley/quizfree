@@ -33,7 +33,7 @@
       "file_type": "code",
       "norm_label": "back()",
       "source_file": "app.js",
-      "source_location": "L139"
+      "source_location": "L195"
     },
     {
       "id": "app_cur",
@@ -45,7 +45,7 @@
       "file_type": "code",
       "norm_label": "cur()",
       "source_file": "app.js",
-      "source_location": "L49"
+      "source_location": "L53"
     },
     {
       "id": "app_exportsets",
@@ -57,7 +57,7 @@
       "file_type": "code",
       "norm_label": "exportsets()",
       "source_file": "app.js",
-      "source_location": "L228"
+      "source_location": "L325"
     },
     {
       "id": "app_go",
@@ -69,7 +69,7 @@
       "file_type": "code",
       "norm_label": "go()",
       "source_file": "app.js",
-      "source_location": "L137"
+      "source_location": "L193"
     },
     {
       "id": "app_home",
@@ -81,7 +81,7 @@
       "file_type": "code",
       "norm_label": "home()",
       "source_file": "app.js",
-      "source_location": "L138"
+      "source_location": "L194"
     },
     {
       "id": "app_openset",
@@ -93,7 +93,7 @@
       "file_type": "code",
       "norm_label": "openset()",
       "source_file": "app.js",
-      "source_location": "L141"
+      "source_location": "L200"
     },
     {
       "id": "app_plural",
@@ -117,7 +117,19 @@
       "file_type": "code",
       "norm_label": "removeset()",
       "source_file": "app.js",
-      "source_location": "L219"
+      "source_location": "L316"
+    },
+    {
+      "id": "app_runtest",
+      "label": "runTest()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Navigation & Set Actions",
+      "file_type": "code",
+      "norm_label": "runtest()",
+      "source_file": "app.js",
+      "source_location": "L280"
     },
     {
       "id": "app_save",
@@ -129,7 +141,7 @@
       "file_type": "code",
       "norm_label": "save()",
       "source_file": "app.js",
-      "source_location": "L39"
+      "source_location": "L42"
     },
     {
       "id": "app_saveedit",
@@ -141,7 +153,7 @@
       "file_type": "code",
       "norm_label": "saveedit()",
       "source_file": "app.js",
-      "source_location": "L204"
+      "source_location": "L301"
     },
     {
       "id": "app_say",
@@ -153,7 +165,7 @@
       "file_type": "code",
       "norm_label": "say()",
       "source_file": "app.js",
-      "source_location": "L50"
+      "source_location": "L54"
     },
     {
       "id": "app_slug",
@@ -177,7 +189,7 @@
       "file_type": "code",
       "norm_label": "startcards()",
       "source_file": "app.js",
-      "source_location": "L150"
+      "source_location": "L209"
     },
     {
       "id": "app_startlearn",
@@ -189,7 +201,31 @@
       "file_type": "code",
       "norm_label": "startlearn()",
       "source_file": "app.js",
-      "source_location": "L167"
+      "source_location": "L226"
+    },
+    {
+      "id": "app_starttest",
+      "label": "startTest()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Navigation & Set Actions",
+      "file_type": "code",
+      "norm_label": "starttest()",
+      "source_file": "app.js",
+      "source_location": "L263"
+    },
+    {
+      "id": "app_teststart",
+      "label": "testStart()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Navigation & Set Actions",
+      "file_type": "code",
+      "norm_label": "teststart()",
+      "source_file": "app.js",
+      "source_location": "L271"
     },
     {
       "id": "app_bar",
@@ -201,7 +237,7 @@
       "file_type": "code",
       "norm_label": "bar()",
       "source_file": "app.js",
-      "source_location": "L52"
+      "source_location": "L56"
     },
     {
       "id": "app_btn",
@@ -213,79 +249,7 @@
       "file_type": "code",
       "norm_label": "btn()",
       "source_file": "app.js",
-      "source_location": "L51"
-    },
-    {
-      "id": "app_esc",
-      "label": "esc()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App Shell & UI State",
-      "file_type": "code",
-      "norm_label": "esc()",
-      "source_file": "app.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "core_answer",
-      "label": "answer()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Study Core & Tests",
-      "file_type": "code",
-      "norm_label": "answer()",
-      "source_file": "core.js",
-      "source_location": "L37"
-    },
-    {
-      "id": "core_choices",
-      "label": "choices()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Study Core & Tests",
-      "file_type": "code",
-      "norm_label": "choices()",
-      "source_file": "core.js",
-      "source_location": "L23"
-    },
-    {
-      "id": "core_iscorrect",
-      "label": "isCorrect()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Study Core & Tests",
-      "file_type": "code",
-      "norm_label": "iscorrect()",
-      "source_file": "core.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "core_parsecards",
-      "label": "parseCards()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Study Core & Tests",
-      "file_type": "code",
-      "norm_label": "parsecards()",
-      "source_file": "core.js",
-      "source_location": "L46"
-    },
-    {
-      "id": "core_shuffle",
-      "label": "shuffle()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Study Core & Tests",
-      "file_type": "code",
-      "norm_label": "shuffle()",
-      "source_file": "core.js",
-      "source_location": "L13"
+      "source_location": "L55"
     },
     {
       "id": "app_answerside",
@@ -297,7 +261,7 @@
       "file_type": "code",
       "norm_label": "answerside()",
       "source_file": "app.js",
-      "source_location": "L165"
+      "source_location": "L224"
     },
     {
       "id": "app_grade",
@@ -309,7 +273,7 @@
       "file_type": "code",
       "norm_label": "grade()",
       "source_file": "app.js",
-      "source_location": "L175"
+      "source_location": "L234"
     },
     {
       "id": "app_learnnext",
@@ -321,7 +285,7 @@
       "file_type": "code",
       "norm_label": "learnnext()",
       "source_file": "app.js",
-      "source_location": "L183"
+      "source_location": "L242"
     },
     {
       "id": "app_learnpick",
@@ -333,7 +297,7 @@
       "file_type": "code",
       "norm_label": "learnpick()",
       "source_file": "app.js",
-      "source_location": "L190"
+      "source_location": "L249"
     },
     {
       "id": "app_learntype",
@@ -345,31 +309,19 @@
       "file_type": "code",
       "norm_label": "learntype()",
       "source_file": "app.js",
-      "source_location": "L196"
+      "source_location": "L255"
     },
     {
-      "id": "app_render",
-      "label": "render()",
+      "id": "app_other",
+      "label": "other()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
       "community_name": "Learn Mode Flow",
       "file_type": "code",
-      "norm_label": "render()",
+      "norm_label": "other()",
       "source_file": "app.js",
-      "source_location": "L127"
-    },
-    {
-      "id": "app_step",
-      "label": "step()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "Learn Mode Flow",
-      "file_type": "code",
-      "norm_label": "step()",
-      "source_file": "app.js",
-      "source_location": "L156"
+      "source_location": "L11"
     },
     {
       "id": "app_cleanset",
@@ -381,7 +333,7 @@
       "file_type": "code",
       "norm_label": "cleanset()",
       "source_file": "app.js",
-      "source_location": "L19"
+      "source_location": "L22"
     },
     {
       "id": "app_load",
@@ -393,7 +345,7 @@
       "file_type": "code",
       "norm_label": "load()",
       "source_file": "app.js",
-      "source_location": "L26"
+      "source_location": "L29"
     },
     {
       "id": "app_uid",
@@ -406,6 +358,334 @@
       "norm_label": "uid()",
       "source_file": "app.js",
       "source_location": "L7"
+    },
+    {
+      "id": "app_esc",
+      "label": "esc()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "README & Escaping",
+      "file_type": "code",
+      "norm_label": "esc()",
+      "source_file": "app.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "core_answer",
+      "label": "answer()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Study Logic (core.js)",
+      "file_type": "code",
+      "norm_label": "answer()",
+      "source_file": "core.js",
+      "source_location": "L39"
+    },
+    {
+      "id": "core_choices",
+      "label": "choices()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Study Logic (core.js)",
+      "file_type": "code",
+      "norm_label": "choices()",
+      "source_file": "core.js",
+      "source_location": "L26"
+    },
+    {
+      "id": "core_createtest",
+      "label": "createTest()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Study Logic (core.js)",
+      "file_type": "code",
+      "norm_label": "createtest()",
+      "source_file": "core.js",
+      "source_location": "L65"
+    },
+    {
+      "id": "core_gradetest",
+      "label": "gradeTest()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Study Logic (core.js)",
+      "file_type": "code",
+      "norm_label": "gradetest()",
+      "source_file": "core.js",
+      "source_location": "L92"
+    },
+    {
+      "id": "core_iscorrect",
+      "label": "isCorrect()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Study Logic (core.js)",
+      "file_type": "code",
+      "norm_label": "iscorrect()",
+      "source_file": "core.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "core_parsecards",
+      "label": "parseCards()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Study Logic (core.js)",
+      "file_type": "code",
+      "norm_label": "parsecards()",
+      "source_file": "core.js",
+      "source_location": "L48"
+    },
+    {
+      "id": "core_shuffle",
+      "label": "shuffle()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Study Logic (core.js)",
+      "file_type": "code",
+      "norm_label": "shuffle()",
+      "source_file": "core.js",
+      "source_location": "L16"
+    },
+    {
+      "id": "app_render",
+      "label": "render()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "Rendering & Test Grading",
+      "file_type": "code",
+      "norm_label": "render()",
+      "source_file": "app.js",
+      "source_location": "L183"
+    },
+    {
+      "id": "app_step",
+      "label": "step()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "Rendering & Test Grading",
+      "file_type": "code",
+      "norm_label": "step()",
+      "source_file": "app.js",
+      "source_location": "L215"
+    },
+    {
+      "id": "app_submittest",
+      "label": "submitTest()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "Rendering & Test Grading",
+      "file_type": "code",
+      "norm_label": "submittest()",
+      "source_file": "app.js",
+      "source_location": "L286"
+    },
+    {
+      "id": "index_app_js_include",
+      "label": "app.js script include",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "app.js script include",
+      "source_file": "index.html",
+      "source_location": "L25",
+      "source_url": null
+    },
+    {
+      "id": "index_cmd",
+      "label": "#cmd command form",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "#cmd command form",
+      "source_file": "index.html",
+      "source_location": "L18-L21",
+      "source_url": null
+    },
+    {
+      "id": "index_cmd_input",
+      "label": "#cmd-input command input",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "#cmd-input command input",
+      "source_file": "index.html",
+      "source_location": "L20",
+      "source_url": null
+    },
+    {
+      "id": "index_core_js_include",
+      "label": "core.js script include",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "core.js script include",
+      "source_file": "index.html",
+      "source_location": "L24",
+      "source_url": null
+    },
+    {
+      "id": "index_import_file",
+      "label": "#import-file JSON deck import input",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "#import-file json deck import input",
+      "source_file": "index.html",
+      "source_location": "L23",
+      "source_url": null
+    },
+    {
+      "id": "index_out",
+      "label": "#out status output",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "#out status output",
+      "source_file": "index.html",
+      "source_location": "L17",
+      "source_url": null
+    },
+    {
+      "id": "index_prompt",
+      "label": "#prompt label (guest@quizfree:~$)",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "#prompt label (guest@quizfree:~$)",
+      "source_file": "index.html",
+      "source_location": "L19",
+      "source_url": null
+    },
+    {
+      "id": "index_quizfree_page",
+      "label": "quizfree Terminal Page (index.html)",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "quizfree terminal page (index.html)",
+      "source_file": "index.html",
+      "source_location": "L1-L27",
+      "source_url": null
+    },
+    {
+      "id": "index_screen",
+      "label": "#screen main view",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "#screen main view",
+      "source_file": "index.html",
+      "source_location": "L16",
+      "source_url": null
+    },
+    {
+      "id": "index_style_css_include",
+      "label": "style.css stylesheet include",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "style.css stylesheet include",
+      "source_file": "index.html",
+      "source_location": "L11",
+      "source_url": null
+    },
+    {
+      "id": "index_title",
+      "label": "#title header",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "#title header",
+      "source_file": "index.html",
+      "source_location": "L15",
+      "source_url": null
+    },
+    {
+      "id": "index_ibm_plex_mono",
+      "label": "IBM Plex Mono (Google Fonts)",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "ibm plex mono (google fonts)",
+      "source_file": "index.html",
+      "source_location": "L10",
+      "source_url": null
+    },
+    {
+      "id": "index_terminal_ui",
+      "label": "Terminal-style Flashcard UI",
+      "_origin": "ast",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Page Markup & DOM",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "terminal-style flashcard ui",
+      "rationale": "Free flashcards with a learn mode, presented as a terminal: a command prompt drives the app instead of conventional buttons.",
+      "source_file": "index.html",
+      "source_location": "L7",
+      "source_url": null
     },
     {
       "id": "app",
@@ -427,7 +707,7 @@
       "file_type": "code",
       "norm_label": "actions",
       "source_file": "app.js",
-      "source_location": "L255"
+      "source_location": "L352"
     },
     {
       "id": "app_cmdinput",
@@ -449,7 +729,7 @@
       "file_type": "code",
       "norm_label": "keys",
       "source_file": "app.js",
-      "source_location": "L285"
+      "source_location": "L387"
     },
     {
       "id": "app_out",
@@ -471,7 +751,7 @@
       "file_type": "code",
       "norm_label": "sample",
       "source_file": "app.js",
-      "source_location": "L12"
+      "source_location": "L15"
     },
     {
       "id": "app_screen",
@@ -493,7 +773,7 @@
       "file_type": "code",
       "norm_label": "sets",
       "source_file": "app.js",
-      "source_location": "L44"
+      "source_location": "L47"
     },
     {
       "id": "app_side",
@@ -507,6 +787,17 @@
       "source_location": "L10"
     },
     {
+      "id": "app_test_names",
+      "label": "TEST_NAMES",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App Shell & UI State",
+      "file_type": "code",
+      "norm_label": "test_names",
+      "source_file": "app.js",
+      "source_location": "L12"
+    },
+    {
       "id": "app_views",
       "label": "views",
       "_origin": "ast",
@@ -515,25 +806,14 @@
       "file_type": "code",
       "norm_label": "views",
       "source_file": "app.js",
-      "source_location": "L54"
-    },
-    {
-      "id": "core",
-      "label": "core.js",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Study Core & Tests",
-      "file_type": "code",
-      "norm_label": "core.js",
-      "source_file": "core.js",
-      "source_location": "L1"
+      "source_location": "L58"
     },
     {
       "id": "test_core_test",
       "label": "core.test.js",
       "_origin": "ast",
       "community": 2,
-      "community_name": "Study Core & Tests",
+      "community_name": "Core Tests",
       "file_type": "code",
       "norm_label": "core.test.js",
       "source_file": "test/core.test.js",
@@ -544,7 +824,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 2,
-      "community_name": "Study Core & Tests",
+      "community_name": "Core Tests",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "test/core.test.js",
@@ -555,7 +835,7 @@
       "label": "cards",
       "_origin": "ast",
       "community": 2,
-      "community_name": "Study Core & Tests",
+      "community_name": "Core Tests",
       "file_type": "code",
       "norm_label": "cards",
       "source_file": "test/core.test.js",
@@ -566,7 +846,7 @@
       "label": "Core",
       "_origin": "ast",
       "community": 2,
-      "community_name": "Study Core & Tests",
+      "community_name": "Core Tests",
       "file_type": "code",
       "norm_label": "core",
       "source_file": "test/core.test.js",
@@ -577,200 +857,124 @@
       "label": "test",
       "_origin": "ast",
       "community": 2,
-      "community_name": "Study Core & Tests",
+      "community_name": "Core Tests",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "test/core.test.js",
       "source_location": "L1"
     },
     {
-      "id": "index_app_js_include",
-      "label": "app.js script include",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
+      "id": "readme",
+      "label": "README.md",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "README & Escaping",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "readme.md",
+      "source_file": "README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "readme_development",
+      "label": "Development",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "README & Escaping",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "development",
+      "source_file": "README.md",
+      "source_location": "L54"
+    },
+    {
+      "id": "readme_features",
+      "label": "Features",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "README & Escaping",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "features",
+      "source_file": "README.md",
+      "source_location": "L5"
+    },
+    {
+      "id": "readme_license",
+      "label": "License",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "README & Escaping",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "license",
+      "source_file": "README.md",
+      "source_location": "L71"
+    },
+    {
+      "id": "readme_quizfree",
+      "label": "quizfree",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "README & Escaping",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "quizfree",
+      "source_file": "README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "readme_run_it",
+      "label": "Run it",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "README & Escaping",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "run it",
+      "source_file": "README.md",
+      "source_location": "L23"
+    },
+    {
+      "id": "readme_using_it",
+      "label": "Using it",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "README & Escaping",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "using it",
+      "source_file": "README.md",
+      "source_location": "L29"
+    },
+    {
+      "id": "readme_your_data",
+      "label": "Your data",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "README & Escaping",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "your data",
+      "source_file": "README.md",
+      "source_location": "L50"
+    },
+    {
+      "id": "core",
+      "label": "core.js",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Study Logic (core.js)",
       "file_type": "code",
-      "norm_label": "app.js script include",
-      "source_file": "index.html",
-      "source_location": "L25",
-      "source_url": null
-    },
-    {
-      "id": "index_cmd",
-      "label": "#cmd command form",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "#cmd command form",
-      "source_file": "index.html",
-      "source_location": "L18-L21",
-      "source_url": null
-    },
-    {
-      "id": "index_cmd_input",
-      "label": "#cmd-input command input",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "#cmd-input command input",
-      "source_file": "index.html",
-      "source_location": "L20",
-      "source_url": null
-    },
-    {
-      "id": "index_core_js_include",
-      "label": "core.js script include",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "core.js script include",
-      "source_file": "index.html",
-      "source_location": "L24",
-      "source_url": null
-    },
-    {
-      "id": "index_import_file",
-      "label": "#import-file JSON deck import input",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "#import-file json deck import input",
-      "source_file": "index.html",
-      "source_location": "L23",
-      "source_url": null
-    },
-    {
-      "id": "index_out",
-      "label": "#out status output",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "#out status output",
-      "source_file": "index.html",
-      "source_location": "L17",
-      "source_url": null
-    },
-    {
-      "id": "index_prompt",
-      "label": "#prompt label (guest@quizfree:~$)",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "#prompt label (guest@quizfree:~$)",
-      "source_file": "index.html",
-      "source_location": "L19",
-      "source_url": null
-    },
-    {
-      "id": "index_quizfree_page",
-      "label": "quizfree Terminal Page (index.html)",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "quizfree terminal page (index.html)",
-      "source_file": "index.html",
-      "source_location": "L1-L27",
-      "source_url": null
-    },
-    {
-      "id": "index_screen",
-      "label": "#screen main view",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "#screen main view",
-      "source_file": "index.html",
-      "source_location": "L16",
-      "source_url": null
-    },
-    {
-      "id": "index_style_css_include",
-      "label": "style.css stylesheet include",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "style.css stylesheet include",
-      "source_file": "index.html",
-      "source_location": "L11",
-      "source_url": null
-    },
-    {
-      "id": "index_title",
-      "label": "#title header",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "#title header",
-      "source_file": "index.html",
-      "source_location": "L15",
-      "source_url": null
-    },
-    {
-      "id": "index_ibm_plex_mono",
-      "label": "IBM Plex Mono (Google Fonts)",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "ibm plex mono (google fonts)",
-      "source_file": "index.html",
-      "source_location": "L10",
-      "source_url": null
-    },
-    {
-      "id": "index_terminal_ui",
-      "label": "Terminal-style Flashcard UI",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "Page Markup & DOM",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "terminal-style flashcard ui",
-      "rationale": "Free flashcards with a learn mode, presented as a terminal: a command prompt drives the app instead of conventional buttons.",
-      "source_file": "index.html",
-      "source_location": "L7",
-      "source_url": null
+      "norm_label": "core.js",
+      "source_file": "core.js",
+      "source_location": "L1"
     },
     {
       "id": "ref_node_assert",
       "label": "ref_node_assert",
       "community": 2,
-      "community_name": "Study Core & Tests",
+      "community_name": "Core Tests",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_assert",
@@ -781,7 +985,7 @@
       "id": "ref_node_test",
       "label": "ref_node_test",
       "community": 2,
-      "community_name": "Study Core & Tests",
+      "community_name": "Core Tests",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_test",
@@ -791,6 +995,42 @@
   ],
   "links": [
     {
+      "source": "app_answerside",
+      "target": "app_other",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L224",
+      "weight": 1.0
+    },
+    {
+      "source": "app_answerside",
+      "target": "app_learnpick",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L252",
+      "weight": 1.0
+    },
+    {
+      "source": "app_answerside",
+      "target": "app_learntype",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L259",
+      "weight": 1.0
+    },
+    {
       "source": "app_back",
       "target": "app_go",
       "relation": "calls",
@@ -799,7 +1039,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L139",
+      "source_location": "L197",
       "weight": 1.0
     },
     {
@@ -811,7 +1051,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L139",
+      "source_location": "L197",
       "weight": 1.0
     },
     {
@@ -823,7 +1063,103 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L23",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "app_cleanset",
+      "target": "app_load",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "app_cur",
+      "target": "app_render",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "app_cur",
+      "target": "app_startcards",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L210",
+      "weight": 1.0
+    },
+    {
+      "source": "app_cur",
+      "target": "app_startlearn",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L227",
+      "weight": 1.0
+    },
+    {
+      "source": "app_cur",
+      "target": "app_starttest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L264",
+      "weight": 1.0
+    },
+    {
+      "source": "app_cur",
+      "target": "app_runtest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L281",
+      "weight": 1.0
+    },
+    {
+      "source": "app_cur",
+      "target": "app_saveedit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L308",
+      "weight": 1.0
+    },
+    {
+      "source": "app_cur",
+      "target": "app_removeset",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L317",
       "weight": 1.0
     },
     {
@@ -835,7 +1171,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L232",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -847,7 +1183,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L235",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -859,7 +1195,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L235",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -871,7 +1207,91 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L137",
+      "source_location": "L193",
+      "weight": 1.0
+    },
+    {
+      "source": "app_go",
+      "target": "app_home",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L194",
+      "weight": 1.0
+    },
+    {
+      "source": "app_go",
+      "target": "app_openset",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L205",
+      "weight": 1.0
+    },
+    {
+      "source": "app_go",
+      "target": "app_startcards",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L213",
+      "weight": 1.0
+    },
+    {
+      "source": "app_go",
+      "target": "app_startlearn",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L231",
+      "weight": 1.0
+    },
+    {
+      "source": "app_go",
+      "target": "app_starttest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L268",
+      "weight": 1.0
+    },
+    {
+      "source": "app_go",
+      "target": "app_runtest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L282",
+      "weight": 1.0
+    },
+    {
+      "source": "app_go",
+      "target": "app_saveedit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L313",
       "weight": 1.0
     },
     {
@@ -883,7 +1303,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L179",
+      "source_location": "L238",
       "weight": 1.0
     },
     {
@@ -895,19 +1315,43 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L180",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
-      "source": "app_home",
-      "target": "app_go",
+      "source": "app_grade",
+      "target": "app_learnpick",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L138",
+      "source_location": "L252",
+      "weight": 1.0
+    },
+    {
+      "source": "app_grade",
+      "target": "app_learntype",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L259",
+      "weight": 1.0
+    },
+    {
+      "source": "app_home",
+      "target": "app_removeset",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L322",
       "weight": 1.0
     },
     {
@@ -919,79 +1363,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L187",
+      "source_location": "L246",
       "weight": 1.0
     },
     {
-      "source": "app_learnpick",
-      "target": "app_answerside",
+      "source": "app_learnnext",
+      "target": "app_learntype",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L193",
-      "weight": 1.0
-    },
-    {
-      "source": "app_learnpick",
-      "target": "app_grade",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L193",
-      "weight": 1.0
-    },
-    {
-      "source": "app_learntype",
-      "target": "app_learnnext",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L197",
-      "weight": 1.0
-    },
-    {
-      "source": "app_learntype",
-      "target": "app_answerside",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L200",
-      "weight": 1.0
-    },
-    {
-      "source": "app_learntype",
-      "target": "app_grade",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L200",
-      "weight": 1.0
-    },
-    {
-      "source": "app_load",
-      "target": "app_cleanset",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L28",
+      "source_location": "L256",
       "weight": 1.0
     },
     {
@@ -1003,7 +1387,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L143",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
@@ -1015,31 +1399,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L144",
+      "source_location": "L203",
       "weight": 1.0
     },
     {
-      "source": "app_openset",
-      "target": "app_go",
+      "source": "app_plural",
+      "target": "app_saveedit",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L146",
-      "weight": 1.0
-    },
-    {
-      "source": "app_removeset",
-      "target": "app_cur",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L220",
+      "source_location": "L312",
       "weight": 1.0
     },
     {
@@ -1051,7 +1423,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L223",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -1063,43 +1435,55 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L224",
-      "weight": 1.0
-    },
-    {
-      "source": "app_removeset",
-      "target": "app_home",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L225",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
       "source": "app_render",
-      "target": "app_cur",
+      "target": "app_step",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L128",
+      "source_location": "L220",
       "weight": 1.0
     },
     {
       "source": "app_render",
-      "target": "app_slug",
+      "target": "app_submittest",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L130",
+      "source_location": "L296",
+      "weight": 1.0
+    },
+    {
+      "source": "app_runtest",
+      "target": "app_teststart",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L277",
+      "weight": 1.0
+    },
+    {
+      "source": "app_save",
+      "target": "app_saveedit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L311",
       "weight": 1.0
     },
     {
@@ -1111,19 +1495,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L41",
-      "weight": 1.0
-    },
-    {
-      "source": "app_saveedit",
-      "target": "app_cur",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L211",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -1135,31 +1507,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L213",
-      "weight": 1.0
-    },
-    {
-      "source": "app_saveedit",
-      "target": "app_save",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L214",
-      "weight": 1.0
-    },
-    {
-      "source": "app_saveedit",
-      "target": "app_plural",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L215",
+      "source_location": "L310",
       "weight": 1.0
     },
     {
@@ -1171,83 +1519,35 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L215",
+      "source_location": "L312",
       "weight": 1.0
     },
     {
-      "source": "app_saveedit",
-      "target": "app_go",
+      "source": "app_say",
+      "target": "app_startlearn",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L216",
+      "source_location": "L229",
       "weight": 1.0
     },
     {
-      "source": "app_startcards",
-      "target": "app_cur",
+      "source": "app_say",
+      "target": "app_starttest",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L151",
+      "source_location": "L266",
       "weight": 1.0
     },
     {
-      "source": "app_startcards",
-      "target": "app_go",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L154",
-      "weight": 1.0
-    },
-    {
-      "source": "app_startlearn",
-      "target": "app_cur",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L168",
-      "weight": 1.0
-    },
-    {
-      "source": "app_startlearn",
-      "target": "app_say",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L170",
-      "weight": 1.0
-    },
-    {
-      "source": "app_startlearn",
-      "target": "app_go",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L172",
-      "weight": 1.0
-    },
-    {
-      "source": "app_step",
+      "source": "app_slug",
       "target": "app_render",
       "relation": "calls",
       "_origin": "ast",
@@ -1255,7 +1555,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L161",
+      "source_location": "L186",
       "weight": 1.0
     },
     {
@@ -1267,108 +1567,120 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "core.js",
-      "source_location": "L26",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_home",
+      "source": "core_choices",
+      "target": "core_createtest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "core.js",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "core_createtest",
+      "target": "core_shuffle",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "core.js",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "core_gradetest",
+      "target": "core_iscorrect",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "core.js",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "app_back",
+      "target": "app",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L138",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_back",
+      "source": "app_cleanset",
+      "target": "app",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L139",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_openset",
+      "source": "app_cur",
+      "target": "app",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L141",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_cleanset",
+      "source": "app_home",
+      "target": "app",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L19",
+      "source_location": "L194",
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_learnpick",
+      "source": "app_learnpick",
+      "target": "app",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L190",
+      "source_location": "L249",
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_save",
+      "source": "app_openset",
+      "target": "app",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app.js",
-      "source_location": "L39",
+      "source_location": "L200",
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_cur",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L49",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_say",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app.js",
-      "source_location": "L50",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_plural",
+      "source": "app_plural",
+      "target": "app",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1379,15 +1691,51 @@
       "weight": 1.0
     },
     {
-      "source": "core",
-      "target": "core_shuffle",
+      "source": "app_save",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "app_say",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "app_submittest",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app.js",
+      "source_location": "L286",
+      "weight": 1.0
+    },
+    {
+      "source": "core_shuffle",
+      "target": "core",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "core.js",
-      "source_location": "L13",
+      "source_location": "L16",
       "weight": 1.0
     },
     {
@@ -1439,7 +1787,7 @@
     },
     {
       "source": "app",
-      "target": "app_sample",
+      "target": "app_test_names",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1450,68 +1798,13 @@
     },
     {
       "source": "app",
-      "target": "app_render",
+      "target": "app_sample",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app.js",
-      "source_location": "L127",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_go",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app.js",
-      "source_location": "L137",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_step",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app.js",
-      "source_location": "L156",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_answerside",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app.js",
-      "source_location": "L165",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_grade",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app.js",
-      "source_location": "L175",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_exportsets",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app.js",
-      "source_location": "L228",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -1522,18 +1815,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app.js",
-      "source_location": "L255",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_load",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app.js",
-      "source_location": "L26",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -1544,7 +1826,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app.js",
-      "source_location": "L285",
+      "source_location": "L387",
       "weight": 1.0
     },
     {
@@ -1588,29 +1870,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app.js",
-      "source_location": "L44",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_btn",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app.js",
-      "source_location": "L51",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_bar",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app.js",
-      "source_location": "L52",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -1621,12 +1881,45 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app.js",
-      "source_location": "L54",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_esc",
+      "source": "app_answerside",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L224",
+      "weight": 1.0
+    },
+    {
+      "source": "app_bar",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "app_btn",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "app_esc",
+      "target": "app",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1636,8 +1929,96 @@
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_uid",
+      "source": "app_exportsets",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L325",
+      "weight": 1.0
+    },
+    {
+      "source": "app_go",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L193",
+      "weight": 1.0
+    },
+    {
+      "source": "app_grade",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "app_load",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "app_other",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "app_render",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L183",
+      "weight": 1.0
+    },
+    {
+      "source": "app_slug",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_step",
+      "target": "app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.js",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "app_uid",
+      "target": "app",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1647,14 +2028,80 @@
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_slug",
+      "source": "readme",
+      "target": "readme_quizfree",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "app.js",
-      "source_location": "L8",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_development",
+      "target": "readme_quizfree",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_features",
+      "target": "readme_quizfree",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_license",
+      "target": "readme_quizfree",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_quizfree",
+      "target": "readme_run_it",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_quizfree",
+      "target": "readme_using_it",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_quizfree",
+      "target": "readme_your_data",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -1702,129 +2149,10 @@
       "weight": 1.0
     },
     {
-      "source": "app",
-      "target": "app_removeset",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "argument",
-      "source_file": "app.js",
-      "source_location": "L342",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_startcards",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "argument",
-      "source_file": "app.js",
-      "source_location": "L343",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_startlearn",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "argument",
-      "source_file": "app.js",
-      "source_location": "L344",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_learntype",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "collection",
-      "source_file": "app.js",
-      "source_location": "L282",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_saveedit",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "collection",
-      "source_file": "app.js",
-      "source_location": "L282",
-      "weight": 1.0
-    },
-    {
-      "source": "app",
-      "target": "app_learnnext",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "collection",
-      "source_file": "app.js",
-      "source_location": "L290",
-      "weight": 1.0
-    },
-    {
-      "source": "core",
-      "target": "core_answer",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "collection",
-      "source_file": "core.js",
-      "source_location": "L59",
-      "weight": 1.0
-    },
-    {
-      "source": "core",
-      "target": "core_choices",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "collection",
-      "source_file": "core.js",
-      "source_location": "L59",
-      "weight": 1.0
-    },
-    {
-      "source": "core",
-      "target": "core_iscorrect",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "collection",
-      "source_file": "core.js",
-      "source_location": "L59",
-      "weight": 1.0
-    },
-    {
-      "source": "core",
-      "target": "core_parsecards",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "collection",
-      "source_file": "core.js",
-      "source_location": "L59",
-      "weight": 1.0
-    },
-    {
       "source": "index_quizfree_page",
       "target": "index_terminal_ui",
       "relation": "implements",
+      "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
@@ -1832,9 +2160,21 @@
       "weight": 1.0
     },
     {
+      "source": "index_app_js_include",
+      "target": "index_quizfree_page",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
       "source": "index_cmd",
       "target": "index_cmd_input",
       "relation": "references",
+      "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
@@ -1842,9 +2182,10 @@
       "weight": 1.0
     },
     {
-      "source": "index_prompt",
-      "target": "index_cmd_input",
+      "source": "index_cmd_input",
+      "target": "index_prompt",
       "relation": "references",
+      "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
@@ -1852,9 +2193,21 @@
       "weight": 1.0
     },
     {
+      "source": "index_core_js_include",
+      "target": "index_quizfree_page",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
       "source": "index_quizfree_page",
       "target": "index_ibm_plex_mono",
       "relation": "references",
+      "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
@@ -1865,6 +2218,7 @@
       "source": "index_quizfree_page",
       "target": "index_style_css_include",
       "relation": "references",
+      "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
@@ -1872,29 +2226,10 @@
       "weight": 1.0
     },
     {
-      "source": "index_quizfree_page",
-      "target": "index_core_js_include",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "L24",
-      "weight": 1.0
-    },
-    {
-      "source": "index_quizfree_page",
-      "target": "index_app_js_include",
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "L25",
-      "weight": 1.0
-    },
-    {
       "source": "index_app_js_include",
       "target": "index_title",
       "relation": "shares_data_with",
+      "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.65,
       "source_file": "index.html",
@@ -1905,6 +2240,7 @@
       "source": "index_ibm_plex_mono",
       "target": "index_terminal_ui",
       "relation": "conceptually_related_to",
+      "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.75,
       "source_file": "index.html",
@@ -1915,6 +2251,7 @@
       "source": "index_app_js_include",
       "target": "index_prompt",
       "relation": "shares_data_with",
+      "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.75,
       "source_file": "index.html",
@@ -1925,6 +2262,7 @@
       "source": "index_app_js_include",
       "target": "index_import_file",
       "relation": "shares_data_with",
+      "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.75,
       "source_file": "index.html",
@@ -1932,9 +2270,190 @@
       "weight": 1.0
     },
     {
+      "source": "app_removeset",
+      "target": "app",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "app.js",
+      "source_location": "L452",
+      "weight": 1.0
+    },
+    {
+      "source": "app_startcards",
+      "target": "app",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "app.js",
+      "source_location": "L453",
+      "weight": 1.0
+    },
+    {
+      "source": "app_startlearn",
+      "target": "app",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "app.js",
+      "source_location": "L454",
+      "weight": 1.0
+    },
+    {
+      "source": "app_starttest",
+      "target": "app",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "app.js",
+      "source_location": "L455",
+      "weight": 1.0
+    },
+    {
+      "source": "app_learnnext",
+      "target": "app",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "app.js",
+      "source_location": "L393",
+      "weight": 1.0
+    },
+    {
+      "source": "app_learntype",
+      "target": "app",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "app.js",
+      "source_location": "L384",
+      "weight": 1.0
+    },
+    {
+      "source": "app_runtest",
+      "target": "app",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "app.js",
+      "source_location": "L362",
+      "weight": 1.0
+    },
+    {
+      "source": "app_saveedit",
+      "target": "app",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "app.js",
+      "source_location": "L384",
+      "weight": 1.0
+    },
+    {
+      "source": "app_teststart",
+      "target": "app",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "app.js",
+      "source_location": "L384",
+      "weight": 1.0
+    },
+    {
+      "source": "core_answer",
+      "target": "core",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "core.js",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "core_choices",
+      "target": "core",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "core.js",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "core_createtest",
+      "target": "core",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "core.js",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "core_gradetest",
+      "target": "core",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "core.js",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "core_iscorrect",
+      "target": "core",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "core.js",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "core_parsecards",
+      "target": "core",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "core.js",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
       "source": "index_app_js_include",
       "target": "index_core_js_include",
       "relation": "references",
+      "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "index.html",
@@ -1945,6 +2464,7 @@
       "source": "index_app_js_include",
       "target": "index_screen",
       "relation": "shares_data_with",
+      "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "index.html",
@@ -1955,6 +2475,7 @@
       "source": "index_app_js_include",
       "target": "index_out",
       "relation": "shares_data_with",
+      "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "index.html",
@@ -1965,10 +2486,23 @@
       "source": "index_app_js_include",
       "target": "index_cmd",
       "relation": "shares_data_with",
+      "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "index.html",
       "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "app_esc",
+      "target": "readme_using_it",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "esc",
+      "source_file": "README.md",
+      "source_location": "L33",
       "weight": 1.0
     }
   ],
@@ -1989,5 +2523,5 @@
       "source_file": "index.html"
     }
   ],
-  "built_at_commit": "7bc86f3c92c84bd12b5d4a793da91399fb67d032"
+  "built_at_commit": "3246975f2b14a7ce7941fec7199e4df17fd0b4bc"
 }

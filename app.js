@@ -8,6 +8,9 @@ const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'set';
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 const SIDE = { term: 'term', def: 'definition' };
+const other = side => (side === 'term' ? 'def' : 'term');
+const TEST_NAMES = { match: 'matching', choice: 'multiple choice', written: 'written' };
+const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
 
 const SAMPLE = {
   name: 'spanish basics',
@@ -45,6 +48,7 @@ let sets = load();
 let view = 'home', setId = null;
 let flash = null; // { order, i, flipped }
 let learn = null; // { session, ask, options, feedback, wrong }
+let test = null; // { types, count, ask, questions, answers, result }; questions null = setup screen
 
 const cur = () => sets.find(s => s.id === setId);
 const say = (msg, cls = '') => { out.className = cls; out.textContent = msg; };
@@ -67,7 +71,7 @@ const views = {
     <p><span class="ps">$</span> cat ${esc(slug(s.name))}.set</p>
     <h1>${esc(s.name)}</h1>
     <p class="dim">${plural(s.cards.length, 'card')}</p>
-    <p>${btn('f', 'flashcards', 'cards')} ${btn('l', 'learn', 'learn')} ${btn('e', 'edit', 'edit')} ${btn('x', 'export', 'export')} ${btn('d', 'delete', 'rm')} ${btn('esc', 'back', 'back')}</p>
+    <p>${btn('f', 'flashcards', 'cards')} ${btn('l', 'learn', 'learn')} ${btn('t', 'test', 'test')} ${btn('e', 'edit', 'edit')} ${btn('x', 'export', 'export')} ${btn('d', 'delete', 'rm')} ${btn('esc', 'back', 'back')}</p>
     <table class="terms">${s.cards.map(c => `<tr><td>${esc(c.term)}</td><td>→</td><td>${esc(c.def)}</td></tr>`).join('')}</table>`,
 
   edit: s => `
@@ -122,12 +126,64 @@ const views = {
       ${body}${feedback}
       <p class="dim">${btn('t', 'swap sides', 'swap')} ${btn('esc', 'back', 'back')}</p>`;
   },
+
+  test: s => {
+    const T = test;
+    if (!T.questions) return `
+      <p><span class="ps">$</span> quizfree test ${esc(slug(s.name))}</p>
+      <form data-act="testStart" class="setup">
+        <fieldset><legend>question types</legend>
+          ${Object.entries(TEST_NAMES).map(([t, label]) => `<label><input type="checkbox" name="types" value="${t}" ${T.types.includes(t) ? 'checked' : ''}> ${label}</label>`).join('')}
+        </fieldset>
+        <fieldset><legend>direction</legend>
+          ${['term', 'def'].map(a => `<label><input type="radio" name="ask" value="${a}" ${T.ask === a ? 'checked' : ''}> shown ${SIDE[a]}, answer with ${SIDE[other(a)]}</label>`).join('')}
+        </fieldset>
+        <label>questions <input type="number" name="count" min="1" max="${s.cards.length}" value="${Math.min(T.count, s.cards.length)}" autofocus> <span class="dim">of ${s.cards.length}</span></label>
+        <p class="err" role="alert"></p>
+        <p><button type="submit"><span class="k">[enter]</span> start test</button> ${btn('esc', 'back', 'back')}</p>
+      </form>`;
+
+    const R = T.result, A = T.answers || [], dis = R ? 'disabled' : '';
+    const mark = ok => (!R ? '' : ok ? ' <span class="ok">✓</span>' : ' <span class="err">✗</span>');
+    const fix = (ok, answer) => (R && !ok ? `<span class="fix">→ ${esc(answer)}</span>` : '');
+    let num = 0, last = '';
+    const body = T.questions.map((q, i) => {
+      const head = q.type === last ? '' : `<h2>── ${TEST_NAMES[(last = q.type)]} ──</h2>`;
+      const ok = R ? R.results[i] : [];
+      if (q.type === 'match') return head + `<div class="q">
+        <ul class="match-opts">${q.options.map((o, k) => `<li><span class="k">${LETTERS[k]})</span> ${esc(o)}</li>`).join('')}</ul>
+        ${q.items.map((it, j) => {
+          const picked = A[i] ? q.options.indexOf(A[i][j]) : -1;
+          return `<div class="match-row">
+            <select name="q${i}-${j}" aria-label="letter for ${esc(it.prompt)}" ${dis}><option value="">-</option>${q.options.map((_, k) => `<option value="${k}" ${picked === k ? 'selected' : ''}>${LETTERS[k]}</option>`).join('')}</select>
+            <span><span class="qn">${++num}.</span> ${esc(it.prompt)}${mark(ok[j])}${fix(ok[j], it.answer)}</span>
+          </div>`;
+        }).join('')}
+      </div>`;
+      if (q.type === 'choice') return head + `<fieldset class="q"><legend><span class="qn">${++num}.</span> ${esc(q.prompt)}${mark(ok[0])}</legend>
+        ${q.options.map((o, k) => `<label class="opt"><input type="radio" name="q${i}" value="${k}" ${A[i] === o ? 'checked' : ''} ${dis}> ${esc(o)}</label>`).join('')}
+        ${fix(ok[0], q.answer)}
+      </fieldset>`;
+      return head + `<div class="q"><label for="q${i}"><span class="qn">${++num}.</span> ${esc(q.prompt)}${mark(ok[0])}</label>
+        <div class="typeline"><span class="ps">&gt;</span><input id="q${i}" name="q${i}" spellcheck="false" autocomplete="off" autocapitalize="off" value="${esc(A[i] || '')}" ${dis}></div>
+        ${fix(ok[0], q.answer)}
+      </div>`;
+    }).join('');
+
+    const score = R ? `<p class="${R.score === R.total ? 'ok' : 'hi'}">score: ${R.score}/${R.total} (${Math.round((R.score / R.total) * 100)}%) ${bar(R.score, R.total)}${R.blank ? ` · ${R.blank} unanswered` : ''}</p>` : '';
+    const nav = R
+      ? `${btn('r', 'retake', 'retest')} ${btn('n', 'new test', 'testSetup')}`
+      : '<button type="button" data-act="grade"><span class="k">[ctrl+enter]</span> submit</button>';
+    return `<p class="dim">test · ${plural(num, 'question')} · shown ${SIDE[T.ask]}, answer with ${SIDE[other(T.ask)]}</p>
+      ${score}<form data-act="test">${body}</form>
+      <p>${nav} ${btn('esc', 'back', 'back')}</p>`;
+  },
 };
 
 function render() {
   const set = cur();
   if (!set && view !== 'home' && view !== 'edit') view = 'home';
-  const path = '~/sets' + (set ? '/' + slug(set.name) : view === 'edit' ? '/new' : '') + ({ cards: '/cards', learn: '/learn', edit: '/edit' }[view] || '');
+  const path = '~/sets' + (set ? '/' + slug(set.name) : view === 'edit' ? '/new' : '') + ({ cards: '/cards', learn: '/learn', test: '/test', edit: '/edit' }[view] || '');
   $('#title').textContent = 'quizfree — ' + path;
   $('#prompt').textContent = `guest@quizfree:${path}$`;
   screen.innerHTML = views[view](set);
@@ -136,7 +192,10 @@ function render() {
 
 const go = v => { view = v; render(); };
 const home = () => { setId = null; go('home'); };
-const back = () => (view === 'set' || view === 'home' || (view === 'edit' && !setId) ? home() : go('set'));
+function back() {
+  if (view === 'test' && test.questions && !test.result && !confirm('leave this test? your answers will be lost.')) return;
+  view === 'set' || view === 'home' || (view === 'edit' && !setId) ? home() : go('set');
+}
 
 function openSet(arg) {
   const a = String(arg).trim().toLowerCase();
@@ -162,7 +221,7 @@ function step(d) {
 }
 
 // --- learn ---
-const answerSide = () => (learn.ask === 'term' ? 'def' : 'term');
+const answerSide = () => other(learn.ask);
 
 function startLearn() {
   const s = cur();
@@ -198,6 +257,44 @@ function learnType(form) {
   const given = form.querySelector('input').value;
   if (!given.trim()) return;
   grade(Core.isCorrect(given, Core.current(learn.session).card[answerSide()]), { given });
+}
+
+// --- test ---
+function startTest() {
+  const s = cur();
+  if (!s) return;
+  if (s.cards.length < 2) return say('test needs at least 2 cards in the set', 'err');
+  test = { types: test ? test.types : Object.keys(TEST_NAMES), count: test ? test.count : 20, ask: test ? test.ask : 'term', questions: null };
+  go('test');
+}
+
+function testStart(form) {
+  const f = new FormData(form);
+  const types = f.getAll('types'), count = parseInt(f.get('count'), 10);
+  if (!types.length) return (form.querySelector('.err').textContent = 'pick at least one question type');
+  if (!(count >= 1)) return (form.querySelector('.err').textContent = 'ask at least 1 question');
+  Object.assign(test, { types, count, ask: f.get('ask') === 'def' ? 'def' : 'term' });
+  runTest();
+}
+
+function runTest() {
+  Object.assign(test, Core.createTest(cur().cards, test), { answers: null, result: null });
+  go('test');
+  scrollTo(0, 0);
+}
+
+function submitTest() {
+  const form = screen.querySelector('form[data-act="test"]');
+  if (!form || test.result) return;
+  const f = new FormData(form);
+  const opt = (q, v) => (v ? q.options[v] : null);
+  test.answers = test.questions.map((q, i) =>
+    q.type === 'match' ? q.items.map((_, j) => opt(q, f.get(`q${i}-${j}`)))
+      : q.type === 'choice' ? opt(q, f.get(`q${i}`))
+        : f.get(`q${i}`) || '');
+  test.result = Core.gradeTest(test, test.answers);
+  render();
+  scrollTo(0, 0);
 }
 
 // --- edit / delete / import / export ---
@@ -260,6 +357,10 @@ const actions = {
   cards: startCards,
   learn: startLearn,
   restart: startLearn,
+  test: startTest,
+  grade: submitTest,
+  retest: runTest,
+  testSetup: () => { test.questions = null; render(); },
   flip: () => { flash.flipped = !flash.flipped; render(); },
   next: () => (view === 'learn' ? learnNext() : step(1)),
   prev: () => step(-1),
@@ -279,12 +380,14 @@ screen.addEventListener('click', e => {
 });
 screen.addEventListener('submit', e => {
   e.preventDefault();
-  ({ type: learnType, save: saveEdit })[e.target.dataset.act]?.(e.target);
+  // the test form is graded only by its submit button / ctrl+enter, never by enter in a field
+  ({ type: learnType, save: saveEdit, testStart })[e.target.dataset.act]?.(e.target);
 });
 
 const keys = {
   home: { n: actions.new, i: actions.import, e: () => sets.length && actions.exportAll() },
-  set: { f: startCards, l: startLearn, e: actions.edit, x: actions.export, d: removeSet },
+  set: { f: startCards, l: startLearn, t: startTest, e: actions.edit, x: actions.export, d: removeSet },
+  test: { r: () => test.result && runTest(), n: () => test.result && actions.testSetup() },
   edit: {},
   cards: { ' ': actions.flip, Enter: actions.flip, ArrowRight: () => step(1), ArrowLeft: () => step(-1), s: actions.shuffle, l: startLearn },
   learn: { Enter: learnNext, o: actions.override, t: actions.swap, f: () => !Core.current(learn.session) && startCards(), r: () => !Core.current(learn.session) && startLearn() },
@@ -293,11 +396,18 @@ const keys = {
 document.addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey || e.altKey) {
     if (view === 'edit' && e.key.toLowerCase() === 's') { e.preventDefault(); screen.querySelector('form').requestSubmit(); }
+    if (view === 'test' && e.key === 'Enter') { e.preventDefault(); submitTest(); }
     return;
   }
   const t = e.target;
-  if (t.matches('input, textarea')) {
+  if (t.matches('input, textarea, select')) {
     if (e.key === 'Escape') { t.blur(); if (t.id === 'answer') back(); } // esc in the editor only blurs, so edits aren't lost
+    if (e.key === 'Enter' && t.form?.dataset.act === 'test' && t.matches('input:not([type])')) {
+      // enter in a written answer jumps to the next field
+      e.preventDefault();
+      const fields = [...t.form.elements].filter(el => el.matches('input:not([type]), select'));
+      fields[fields.indexOf(t) + 1]?.focus();
+    }
     return;
   }
   if (t.matches('button') && (e.key === 'Enter' || e.key === ' ')) return; // let the focused button handle it
@@ -317,7 +427,7 @@ const HELP = `commands:
   cd <n|name>      open a set (cd .. goes back)
   new              create a set
   edit | rm        edit / delete the open set
-  cards | learn    study the open set
+  cards | learn | test   study the open set
   import | export  import a .json file / export the open set (or all sets)
   clear            clear this output
 keys: [:] jump to this prompt · [esc] back · the [keys] shown on screen work anywhere`;
@@ -342,6 +452,7 @@ $('#cmd').addEventListener('submit', e => {
     rm: needSet(removeSet),
     cards: needSet(startCards),
     learn: needSet(startLearn),
+    test: needSet(startTest),
   }[name.toLowerCase()];
   run ? run() : say(`command not found: ${name} — try 'help'`, 'err');
   if (view !== 'edit' && !screen.querySelector('[autofocus]')) cmdInput.focus();
