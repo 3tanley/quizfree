@@ -53,8 +53,10 @@ let flash = null; // { order, i, flipped }
 let learn = null; // { session, ask, options, feedback, wrong }
 let test = null; // { types, count, ask, questions, answers, result }; questions null = setup screen
 let quizletLink = '';
+let selected = new Set(); // set ids picked on the set list (shift+number / shift+click) for exporting together
 
 const cur = () => sets.find(s => s.id === setId);
+const picked = () => sets.filter(s => selected.has(s.id));
 const say = (msg, cls = '') => { out.className = cls; out.textContent = msg; };
 const btn = (key, label, act) => `<button type="button" data-act="${act}"><span class="k">[${key}]</span> ${label}</button>`;
 const bar = (n, total, w = 20) => { const f = total ? Math.round((n / total) * w) : 0; return `[${'#'.repeat(f)}${'.'.repeat(w - f)}]`; };
@@ -64,11 +66,13 @@ const views = {
     <p class="dim">quizfree — free flashcards for you and your friends. click anything, or type <span class="k">help</span> below.</p>
     <p><span class="ps">$</span> ls ~/sets</p>
     ${sets.length
-      ? `<ol class="list">${sets.map((s, i) => `<li><button type="button" class="row" data-act="open" data-id="${esc(s.id)}">
-          <span class="k">[${i + 1}]</span><span>${esc(s.name)}</span><span class="leader"></span><span class="dim">${plural(s.cards.length, 'card')}</span>
+      ? `<ol class="list">${sets.map((s, i) => `<li><button type="button" class="row${selected.has(s.id) ? ' sel' : ''}" data-act="open" data-id="${esc(s.id)}">
+          <span class="k">[${i + 1}]</span><span class="mark" aria-hidden="true">${selected.has(s.id) ? '*' : ' '}</span><span>${esc(s.name)}${selected.has(s.id) ? '<span class="sr-only"> (selected)</span>' : ''}</span><span class="leader"></span><span class="dim">${plural(s.cards.length, 'card')}</span>
         </button></li>`).join('')}</ol>`
       : '<p class="dim">(empty) — make your first set with [n]</p>'}
-    <p>${btn('n', 'new set', 'new')} ${btn('q', 'from quizlet', 'quizlet')} ${btn('i', 'import', 'import')} ${sets.length ? btn('e', 'export all', 'exportAll') : ''}</p>
+    <p>${btn('n', 'new set', 'new')} ${btn('q', 'from quizlet', 'quizlet')} ${btn('i', 'import', 'import')}
+      ${!sets.length ? '' : picked().length ? `${btn('e', `export ${picked().length} selected`, 'exportSel')} ${btn('esc', 'clear selection', 'back')}` : btn('e', 'export all', 'exportAll')}</p>
+    ${sets.length > 1 ? '<p class="dim">shift + a number (or shift + click) selects sets to export together.</p>' : ''}
     <p class="blink"><span class="ps">$</span></p>`,
 
   set: s => `
@@ -194,7 +198,7 @@ const views = {
     const score = R ? `<p class="${R.score === R.total ? 'ok' : 'hi'}">score: ${R.score}/${R.total} (${Math.round((R.score / R.total) * 100)}%) ${bar(R.score, R.total)}${R.blank ? ` · ${R.blank} unanswered` : ''}</p>` : '';
     const nav = R
       ? `${btn('r', 'retake', 'retest')} ${btn('n', 'new test', 'testSetup')}`
-      : '<button type="button" data-act="grade"><span class="k">[ctrl+enter]</span> submit</button>';
+      : `<button type="button" data-act="grade"><span class="k">[ctrl+enter]</span> submit</button> ${btn('n', 'start over', 'testSetup')}`;
     return `<p class="dim">test · ${plural(num, 'question')} · shown ${SIDE[T.ask]}, answer with ${SIDE[other(T.ask)]}</p>
       ${score}<form data-act="test">${body}</form>
       <p>${nav} ${btn('esc', 'back', 'back')}</p>`;
@@ -209,13 +213,78 @@ function render() {
   $('#prompt').textContent = `guest@quizfree:${path}$`;
   screen.innerHTML = views[view](set);
   screen.querySelector('[autofocus]')?.focus();
+  saveProgress();
 }
 
 const go = v => { view = v; render(); };
 const home = () => { setId = null; go('home'); };
 function back() {
-  if (view === 'test' && test.questions && !test.result && !confirm('leave this test? your answers will be lost.')) return;
+  if (view === 'home' && selected.size) { selected.clear(); return render(); }
   view === 'set' || view === 'home' || view === 'quizlet' || (view === 'edit' && !setId) ? home() : go('set');
+}
+
+function toggleSelected(s) {
+  if (!s) return;
+  selected.has(s.id) ? selected.delete(s.id) : selected.add(s.id);
+  render();
+}
+
+// --- saved progress: the screen you were on, plus each set's flashcard / learn / test state ---
+// Progress is tied to a fingerprint of the set's cards, so editing a set starts it fresh.
+const PROGRESS_KEY = 'quizfree.progress';
+const fingerprint = cards => { let h = 0; for (const ch of JSON.stringify(cards)) h = (h * 31 + ch.codePointAt(0)) >>> 0; return h; };
+
+// always read fresh: another open quizfree tab may have saved progress for a different set
+function loadProgress() {
+  try {
+    const p = JSON.parse(localStorage.getItem(PROGRESS_KEY));
+    if (p && typeof p === 'object' && p.sets && typeof p.sets === 'object') return p;
+  } catch {}
+  return { view: 'home', setId: null, sets: {} };
+}
+function writeProgress(p) {
+  try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(p)); } catch {} // progress is a nicety; sets are saved separately
+}
+
+const snapshot = {
+  cards: () => ({ order: flash.order, i: flash.i, flipped: flash.flipped }),
+  learn: s => ({ queue: learn.session.queue.map(q => [s.cards.indexOf(q.card), q.stage]), done: learn.session.done, ask: learn.ask, wrong: learn.wrong }),
+  test: () => ({ types: test.types, count: test.count, ask: test.ask, questions: test.questions, answers: test.answers, result: test.result }),
+};
+
+function saveProgress() {
+  const p = loadProgress(), s = cur();
+  if (s && snapshot[view]) {
+    const fp = fingerprint(s.cards);
+    const entry = p.sets[s.id] && p.sets[s.id].fp === fp ? p.sets[s.id] : { fp };
+    entry[view] = snapshot[view](s);
+    p.sets[s.id] = entry;
+  }
+  p.view = view;
+  p.setId = setId;
+  writeProgress(p);
+}
+
+function savedProgress(s, mode) {
+  const entry = loadProgress().sets[s.id];
+  return entry && entry.fp === fingerprint(s.cards) && entry[mode] && typeof entry[mode] === 'object' ? entry[mode] : null;
+}
+
+const isStr = v => typeof v === 'string';
+const validQuestion = q => !!q && (
+  q.type === 'match' ? Array.isArray(q.items) && q.items.length > 0 && q.items.every(it => it && isStr(it.prompt) && isStr(it.answer)) && Array.isArray(q.options) && q.options.every(isStr)
+    : q.type === 'choice' ? isStr(q.prompt) && isStr(q.answer) && Array.isArray(q.options) && q.options.every(isStr)
+      : q.type === 'written' && isStr(q.prompt) && isStr(q.answer));
+
+// on page load: go back to the set and study mode you were in
+function resume() {
+  const p = loadProgress(), s = sets.find(x => x.id === p.setId);
+  if (!s) return render();
+  setId = s.id;
+  const start = { cards: startCards, learn: startLearn, test: startTest }[p.view];
+  if (start) start();
+  if (view === 'home') go('set'); // not a study mode, or it couldn't start (e.g. too few cards)
+  else say('picked up where you left off');
 }
 
 function openSet(arg) {
@@ -230,7 +299,11 @@ function openSet(arg) {
 function startCards() {
   const s = cur();
   if (!s) return;
-  flash = { order: s.cards.map((_, i) => i), i: 0, flipped: false };
+  const p = savedProgress(s, 'cards'), n = s.cards.length;
+  const ok = p && Array.isArray(p.order) && p.order.length === n && new Set(p.order).size === n && p.order.every(i => Number.isInteger(i) && i >= 0 && i < n);
+  flash = ok
+    ? { order: p.order, i: Math.min(Math.max(0, p.i | 0), n - 1), flipped: !!p.flipped }
+    : { order: s.cards.map((_, i) => i), i: 0, flipped: false };
   go('cards');
 }
 function step(d) {
@@ -244,11 +317,19 @@ function step(d) {
 // --- learn ---
 const answerSide = () => other(learn.ask);
 
-function startLearn() {
+// fresh === true skips resuming (learn again / swap sides); clicks pass an element, so check strictly
+function startLearn(fresh) {
   const s = cur();
   if (!s) return;
   if (s.cards.length < 2) return say('learn needs at least 2 cards in the set', 'err');
-  learn = { session: Core.createSession(s.cards), ask: learn ? learn.ask : 'term', options: null, feedback: null, wrong: 0 };
+  const p = fresh === true ? null : savedProgress(s, 'learn'), n = s.cards.length;
+  // a finished session (empty queue) starts over instead of resuming
+  const ok = p && Array.isArray(p.queue) && p.queue.length > 0 && p.queue.length + p.done === n
+    && new Set(p.queue.map(q => q && q[0])).size === p.queue.length
+    && p.queue.every(q => Array.isArray(q) && Number.isInteger(q[0]) && q[0] >= 0 && q[0] < n && (q[1] === 0 || q[1] === 1));
+  learn = ok
+    ? { session: { queue: p.queue.map(([i, stage]) => ({ card: s.cards[i], stage })), done: p.done, total: n }, ask: p.ask === 'def' ? 'def' : 'term', options: null, feedback: null, wrong: Math.max(0, p.wrong | 0) }
+    : { session: Core.createSession(s.cards), ask: learn ? learn.ask : 'term', options: null, feedback: null, wrong: 0 };
   go('learn');
 }
 
@@ -285,7 +366,17 @@ function startTest() {
   const s = cur();
   if (!s) return;
   if (s.cards.length < 2) return say('test needs at least 2 cards in the set', 'err');
-  test = { types: test ? test.types : Object.keys(TEST_NAMES), count: test ? test.count : 20, ask: test ? test.ask : 'term', questions: null };
+  const p = savedProgress(s, 'test'), last = p || test || {};
+  const types = Array.isArray(last.types) ? last.types.filter(t => t in TEST_NAMES) : [];
+  test = {
+    types: types.length ? types : Object.keys(TEST_NAMES),
+    count: Number.isInteger(last.count) && last.count > 0 ? last.count : 20,
+    ask: last.ask === 'def' ? 'def' : 'term',
+    questions: null,
+  };
+  // resume an unfinished test with its answers; a finished one goes back to the setup screen
+  if (p && !p.result && Array.isArray(p.questions) && p.questions.length && p.questions.every(validQuestion))
+    Object.assign(test, { questions: p.questions, answers: Array.isArray(p.answers) ? p.answers : null, result: null });
   go('test');
 }
 
@@ -304,15 +395,29 @@ function runTest() {
   scrollTo(0, 0);
 }
 
-function submitTest() {
-  const form = screen.querySelector('form[data-act="test"]');
-  if (!form || test.result) return;
+function readAnswers(form) {
   const f = new FormData(form);
   const opt = (q, v) => (v ? q.options[v] : null);
-  test.answers = test.questions.map((q, i) =>
+  return test.questions.map((q, i) =>
     q.type === 'match' ? q.items.map((_, j) => opt(q, f.get(`q${i}-${j}`)))
       : q.type === 'choice' ? opt(q, f.get(`q${i}`))
         : f.get(`q${i}`) || '');
+}
+
+// keep answers as they're typed/picked, so leaving mid-test doesn't lose them
+const keepAnswers = e => {
+  const form = e.target.form;
+  if (view !== 'test' || !form || form.dataset.act !== 'test' || test.result) return;
+  test.answers = readAnswers(form);
+  saveProgress();
+};
+screen.addEventListener('input', keepAnswers);
+screen.addEventListener('change', keepAnswers);
+
+function submitTest() {
+  const form = screen.querySelector('form[data-act="test"]');
+  if (!form || test.result) return;
+  test.answers = readAnswers(form);
   test.result = Core.gradeTest(test, test.answers);
   render();
   scrollTo(0, 0);
@@ -338,6 +443,9 @@ function removeSet() {
   const s = cur();
   if (!s || !confirm(`delete "${s.name}"? this can't be undone.`)) return;
   sets = sets.filter(x => x !== s);
+  const p = loadProgress();
+  delete p.sets[s.id];
+  writeProgress(p);
   save();
   say(`deleted ${s.name}`);
   home();
@@ -420,28 +528,38 @@ $('#import-file').addEventListener('change', async e => {
 
 // --- input: clicks, keys, command line ---
 const actions = {
-  open: el => { setId = el.dataset.id; go('set'); },
+  open: (el, e) => {
+    if (e && e.shiftKey) return toggleSelected(sets.find(s => s.id === el.dataset.id));
+    setId = el.dataset.id;
+    go('set');
+  },
   new: () => { setId = null; go('edit'); },
   quizlet: () => { setId = null; go('quizlet'); },
   edit: () => go('edit'),
   back,
   cards: startCards,
   learn: startLearn,
-  restart: startLearn,
+  restart: () => startLearn(true),
   test: startTest,
   grade: submitTest,
   retest: runTest,
-  testSetup: () => { test.questions = null; render(); },
+  testSetup: () => {
+    const answered = !test.result && (test.answers || []).flat().some(a => a && String(a).trim());
+    if (answered && !confirm('start over? your answers on this test will be cleared.')) return;
+    test.questions = null;
+    render();
+  },
   flip: () => { flash.flipped = !flash.flipped; render(); },
   next: () => (view === 'learn' ? learnNext() : step(1)),
   prev: () => step(-1),
   shuffle: () => { flash.order = Core.shuffle(flash.order); flash.i = 0; flash.flipped = false; render(); },
   pick: el => learnPick(+el.dataset.i),
   override: () => { if (learn.feedback && !learn.feedback.ok) { learn.feedback.ok = true; learn.wrong--; learnNext(); } },
-  swap: () => { learn.ask = answerSide(); startLearn(); },
+  swap: () => { learn.ask = answerSide(); startLearn(true); },
   rm: removeSet,
   export: () => exportSets([cur()]),
   exportAll: () => exportSets(sets),
+  exportSel: () => { exportSets(picked()); selected.clear(); render(); },
   import: () => $('#import-file').click(),
 };
 
@@ -451,7 +569,7 @@ screen.addEventListener('click', e => {
     return say('drag that link to your bookmarks bar, then click it while you are on a quizlet set page', 'err');
   }
   const el = e.target.closest('button[data-act]');
-  if (el && !el.disabled) actions[el.dataset.act](el);
+  if (el && !el.disabled) actions[el.dataset.act](el, e);
 });
 screen.addEventListener('submit', e => {
   e.preventDefault();
@@ -460,9 +578,9 @@ screen.addEventListener('submit', e => {
 });
 
 const keys = {
-  home: { n: actions.new, q: actions.quizlet, i: actions.import, e: () => sets.length && actions.exportAll() },
+  home: { n: actions.new, q: actions.quizlet, i: actions.import, e: () => sets.length && (picked().length ? actions.exportSel() : actions.exportAll()) },
   set: { f: startCards, l: startLearn, t: startTest, e: actions.edit, x: actions.export, d: removeSet },
-  test: { r: () => test.result && runTest(), n: () => test.result && actions.testSetup() },
+  test: { r: () => test.result && runTest(), n: () => test.questions && actions.testSetup() },
   edit: {},
   quizlet: {},
   cards: { ' ': actions.flip, Enter: actions.flip, ArrowRight: () => step(1), ArrowLeft: () => step(-1), s: actions.shuffle, l: startLearn },
@@ -489,6 +607,8 @@ document.addEventListener('keydown', e => {
   if (t.matches('button') && (e.key === 'Enter' || e.key === ' ')) return; // let the focused button handle it
   if (e.key === 'Escape') return back();
   if (e.key === ':' || e.key === '/') { e.preventDefault(); return cmdInput.focus(); }
+  // shift+1-9 marks sets for export; e.code because shift turns e.key into "!", "@", ...
+  if (view === 'home' && e.shiftKey && /^Digit[1-9]$/.test(e.code)) { e.preventDefault(); return toggleSelected(sets[e.code.slice(5) - 1]); }
   if (/^[1-9]$/.test(e.key)) {
     if (view === 'home') openSet(e.key);
     else if (view === 'learn') learnPick(e.key - 1);
@@ -505,7 +625,7 @@ const HELP = `commands:
   quizlet [link]   copy a set from a quizlet link
   edit | rm        edit / delete the open set
   cards | learn | test   study the open set
-  import | export  import a .json file / export the open set (or all sets)
+  import | export  import a .json file / export the open set (or the selected sets, or all)
   clear            clear this output
 keys: [:] jump to this prompt · [esc] back · the [keys] shown on screen work anywhere`;
 
@@ -525,7 +645,7 @@ $('#cmd').addEventListener('submit', e => {
     new: actions.new,
     quizlet: () => (arg ? openQuizlet(arg) : actions.quizlet()),
     import: actions.import,
-    export: () => (cur() ? actions.export() : actions.exportAll()),
+    export: () => (cur() ? actions.export() : picked().length ? actions.exportSel() : actions.exportAll()),
     edit: needSet(actions.edit),
     rm: needSet(removeSet),
     cards: needSet(startCards),
@@ -536,5 +656,5 @@ $('#cmd').addEventListener('submit', e => {
   if (view !== 'edit' && !screen.querySelector('[autofocus]')) cmdInput.focus();
 });
 
-importFromHash();
-render();
+if (importFromHash()) render();
+else resume();

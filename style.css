@@ -94,6 +94,9 @@ button:disabled { cursor: default; }
 
 .list { list-style: none; padding: 0; margin: 0 0 16px; }
 .row { display: flex; width: 100%; gap: 10px; align-items: baseline; }
+.mark { width: 1ch; color: var(--amber); white-space: pre; }
+.row.sel { color: var(--hi); background: #ffc46b14; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .leader { flex: 1; min-width: 12px; border-bottom: 1px dotted currentColor; opacity: .4; }
 
 .terms { border-collapse: collapse; width: 100%; margin-top: 8px; }
