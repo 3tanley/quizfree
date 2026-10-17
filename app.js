@@ -61,6 +61,16 @@ const say = (msg, cls = '') => { out.className = cls; out.textContent = msg; };
 const btn = (key, label, act) => `<button type="button" data-act="${act}"><span class="k">[${key}]</span> ${label}</button>`;
 const bar = (n, total, w = 20) => { const f = total ? Math.round((n / total) * w) : 0; return `[${'#'.repeat(f)}${'.'.repeat(w - f)}]`; };
 
+const cardRow = (c = {}) => `
+  <div class="pair">
+    <p class="pair-head"><span class="num"></span><button type="button" data-act="rmRow" aria-label="delete card">[x]</button></p>
+    <div class="sides">
+      <textarea name="term" rows="1" spellcheck="false" placeholder="term" aria-label="term">${esc(c.term || '')}</textarea>
+      <div class="split" role="separator" tabindex="0" aria-orientation="vertical" aria-label="resize term and definition" aria-valuemin="15" aria-valuemax="85" aria-valuenow="40"></div>
+      <textarea name="def" rows="1" spellcheck="false" placeholder="definition" aria-label="definition">${esc(c.def || '')}</textarea>
+    </div>
+  </div>`;
+
 const views = {
   home: () => `
     <p class="dim">quizfree — free flashcards for you and your friends. click anything, or type <span class="k">help</span> below.</p>
@@ -87,8 +97,9 @@ const views = {
     <form data-act="save" class="edit">
       <label for="title">name</label>
       <input id="title" name="title" maxlength="120" value="${s ? esc(s.name) : ''}" ${s ? '' : 'autofocus'}>
-      <label for="body">cards — one per line: <span class="k">term - definition</span> <span class="dim">(tab-separated paste from quizlet or a spreadsheet works too)</span></label>
-      <textarea id="body" name="body" rows="14" spellcheck="false" placeholder="hola - hello&#10;perro - dog">${s ? esc(s.cards.map(c => c.term + '\t' + c.def).join('\n')) : ''}</textarea>
+      <p class="dim">cards — drag the bar between term and definition to resize. pasting tab-separated lines from quizlet or a spreadsheet adds them as cards.</p>
+      <div id="rows">${(s ? s.cards : [{}, {}]).map(cardRow).join('')}</div>
+      <p>${btn('+', 'add card', 'addRow')}</p>
       <p class="err" role="alert"></p>
       <p><button type="submit"><span class="k">[ctrl+s]</span> save</button> ${btn('esc', 'cancel', 'back')}</p>
     </form>`,
@@ -212,6 +223,7 @@ function render() {
   $('#title').textContent = 'quizfree — ' + path;
   $('#prompt').textContent = `guest@quizfree:${path}$`;
   screen.innerHTML = views[view](set);
+  screen.querySelectorAll('.pair textarea').forEach(grow);
   screen.querySelector('[autofocus]')?.focus();
   saveProgress();
 }
@@ -427,9 +439,11 @@ function submitTest() {
 function saveEdit(form) {
   const err = form.querySelector('.err');
   const name = form.elements.title.value.trim();
-  const { cards, bad } = Core.parseCards(form.elements.body.value);
+  const rows = [...form.querySelectorAll('.pair')].map(p => ({ term: p.querySelector('[name=term]').value.trim(), def: p.querySelector('[name=def]').value.trim() }));
+  const bad = rows.findIndex(c => !c.term !== !c.def);
   if (!name) return (err.textContent = 'give the set a name');
-  if (bad.length) return (err.textContent = `line ${bad.join(', ')}: needs "term - definition" (or a tab between them)`);
+  if (bad >= 0) return (err.textContent = `card ${bad + 1}: needs both a term and a definition`);
+  const cards = rows.filter(c => c.term);
   if (!cards.length) return (err.textContent = 'add at least one card');
   const s = cur();
   if (s) Object.assign(s, { name, cards });
@@ -536,6 +550,8 @@ const actions = {
   new: () => { setId = null; go('edit'); },
   quizlet: () => { setId = null; go('quizlet'); },
   edit: () => go('edit'),
+  addRow: () => addRows([{}], $('#rows').lastElementChild, true),
+  rmRow: el => { el.closest('.pair').remove(); if (!$('#rows').children.length) actions.addRow(); },
   back,
   cards: startCards,
   learn: startLearn,
@@ -575,6 +591,54 @@ screen.addEventListener('submit', e => {
   e.preventDefault();
   // the test form is graded only by its submit button / ctrl+enter, never by enter in a field
   ({ type: learnType, save: saveEdit, testStart, quizlet: f => openQuizlet(f.querySelector('input').value) })[e.target.dataset.act]?.(e.target);
+});
+
+// --- editor cards: auto-growing fields, a draggable term/definition divider, multi-line paste ---
+function grow(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; }
+
+function addRows(cards, after, focus) {
+  const box = document.createElement('div');
+  box.innerHTML = cards.map(cardRow).join('');
+  const added = [...box.children];
+  after ? after.after(...added) : $('#rows').append(...added);
+  added.forEach(p => p.querySelectorAll('textarea').forEach(grow));
+  if (focus) added[0].querySelector('textarea').focus();
+}
+
+function setSplit(sides, pct) {
+  pct = Math.round(Math.min(85, Math.max(15, pct)));
+  sides.style.setProperty('--split', pct + '%');
+  sides.querySelector('.split').setAttribute('aria-valuenow', pct);
+  sides.querySelectorAll('textarea').forEach(grow);
+}
+
+screen.addEventListener('input', e => e.target.matches('.pair textarea') && grow(e.target));
+screen.addEventListener('pointerdown', e => {
+  const bar = e.target.closest('.split');
+  if (!bar) return;
+  e.preventDefault();
+  bar.setPointerCapture(e.pointerId);
+  const sides = bar.parentElement;
+  const move = ev => { const r = sides.getBoundingClientRect(); setSplit(sides, ((ev.clientX - r.left) / r.width) * 100); };
+  bar.addEventListener('pointermove', move);
+  bar.addEventListener('lostpointercapture', () => bar.removeEventListener('pointermove', move), { once: true });
+});
+screen.addEventListener('keydown', e => {
+  const step = { ArrowLeft: -5, ArrowRight: 5 }[e.key];
+  if (!step || !e.target.matches('.split')) return;
+  e.preventDefault();
+  setSplit(e.target.parentElement, +e.target.getAttribute('aria-valuenow') + step);
+});
+// a paste of whole "term<TAB>def" lines (quizlet, a spreadsheet) becomes cards instead of text in one field
+screen.addEventListener('paste', e => {
+  const t = e.target, text = e.clipboardData.getData('text');
+  if (!t.matches('.pair textarea') || !/[\n\t]/.test(text.trim())) return;
+  const { cards, bad } = Core.parseCards(text);
+  if (!cards.length || bad.length) return;
+  e.preventDefault();
+  const pair = t.closest('.pair'), [term, def] = pair.querySelectorAll('textarea');
+  if (!term.value.trim() && !def.value.trim()) { term.value = cards[0].term; def.value = cards[0].def; grow(term); grow(def); cards.shift(); }
+  if (cards.length) addRows(cards, pair);
 });
 
 const keys = {

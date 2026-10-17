@@ -24,7 +24,7 @@ Free flashcards for you and your friends, with a terminal-style UI. No account, 
   2. Paste a Quizlet set link. quizfree opens it in a new tab.
   3. Click the **→ quizfree** bookmark on the Quizlet page. On the online version, the set is added to quizfree automatically. On a copy opened from your disk, the bookmark downloads a `.json` instead; press **[i]** to import it.
   - Why a bookmark? Quizlet blocks other sites from reading its pages, so the copying has to happen inside your own browser, on the page you already have open. Click the bookmark again after "See more" to pick up the rest of a long set.
-- **Quizlet/spreadsheet paste.** When editing a set, paste tab-separated `term⇥definition` lines directly.
+- **Quizlet/spreadsheet paste.** When editing a set, paste tab-separated `term⇥definition` lines into any card and each line becomes its own card.
 
 ## Run it
 
@@ -46,7 +46,7 @@ Free flashcards for you and your friends, with a terminal-style UI. No account, 
 
 Command line: `help`, `ls`, `cd <n|name>`, `cd ..`, `new`, `quizlet [link]`, `edit`, `rm`, `cards`, `learn`, `test`, `import`, `export`, `clear`.
 
-Card format in the editor is one card per line:
+In the editor each card has a term and a definition side by side. Drag the bar between them (or focus it and use ←/→) to give the definition more room. Pasted lines become cards when they look like this:
 
 ```
 hola - hello

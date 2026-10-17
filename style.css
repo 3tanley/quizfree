@@ -151,6 +151,21 @@ input:focus, textarea:focus { outline: none; border-color: var(--fg); }
 textarea { resize: vertical; tab-size: 12; }
 
 .edit label { display: block; margin: 12px 0 4px; }
+#rows { counter-reset: card; display: grid; gap: 12px; margin: 8px 0 12px; }
+.pair { counter-increment: card; border: 1px solid var(--line); border-radius: 10px; padding: 6px 14px 12px; background: #a8ec8a08; }
+.pair:focus-within { border-color: var(--dim); }
+.pair-head { display: flex; justify-content: space-between; align-items: center; margin: 0; color: var(--dim); }
+.pair-head .num::before { content: counter(card); }
+.pair-head button { margin: 0; color: var(--dim); }
+.sides { --split: 40%; display: grid; grid-template-columns: var(--split) 17px 1fr; align-items: start; }
+.sides textarea { resize: none; overflow: hidden; border: 0; padding: 6px 4px; }
+.sides textarea:focus { background: #a8ec8a0d; }
+/* the visible bar is 3px; the 17px column is the grab area */
+.split { align-self: stretch; cursor: col-resize; touch-action: none; position: relative; }
+.split::before { content: ""; position: absolute; top: 4px; bottom: 4px; left: 7px; width: 3px; border-radius: 2px; background: var(--line); }
+.split:hover::before, .split:focus-visible::before { background: var(--fg); }
+.split:focus-visible { outline: none; }
+
 .typeline { display: flex; gap: 10px; align-items: center; margin: 4px 0 14px; }
 
 /* test mode */
