@@ -138,7 +138,7 @@ const views = {
     const feedback = !fb ? '' : fb.ok
       ? '<p class="ok" role="status">✓ correct</p>'
       : `<p class="err" role="status">✗ not quite. answer: <span class="hi">${esc(correct)}</span></p>
-         <p>${btn('enter', 'continue', 'next')} ${item.stage === 1 ? btn('o', 'override: i was right', 'override') : ''}</p>`;
+         <p>${item.stage === 1 ? btn('o', 'Override to correct error', 'override') : ''} ${btn('enter', 'continue', 'next')}</p>`;
 
     return head + `
       <div class="card small"><span class="label">${SIDE[L.ask]} · ${item.stage ? 'write' : 'choose'}</span>${esc(item.card[L.ask])}</div>
